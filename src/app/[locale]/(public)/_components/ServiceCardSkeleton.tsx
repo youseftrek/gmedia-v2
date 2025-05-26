@@ -4,40 +4,28 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const ServiceCardSkeleton = () => {
   return (
-    <Card className="flex flex-col justify-between p-5 h-full">
-      <div className="relative flex flex-col h-full">
-        {/* Header with icon and badge */}
-        <div className="flex justify-between items-start mb-4">
-          <Skeleton className="rounded-lg w-12 h-12" />
-          <Skeleton className="w-24 h-6 rounded-full" />
-        </div>
+    <Card className="flex flex-col justify-between p-4 min-h-[260px]">
+      <div>
+        {/* Image skeleton */}
+        <Skeleton className="mb-1 rounded w-[50px] h-[50px]" />
 
         {/* Title skeleton */}
-        <Skeleton className="mb-2 w-3/4 h-6" />
+        <Skeleton className="mb-1 w-3/4 h-6" />
 
-        {/* Description skeleton - 3 lines */}
-        <div className="mb-4">
-          <Skeleton className="mb-1.5 w-full h-3" />
-          <Skeleton className="mb-1.5 w-5/6 h-3" />
-          <Skeleton className="w-4/6 h-3" />
-        </div>
+        {/* Description skeleton */}
+        <Skeleton className="mb-1 w-full h-4" />
+        <Skeleton className="mb-1 w-5/6 h-4" />
+        <Skeleton className="w-4/6 h-4" />
       </div>
-
-      {/* Footer section */}
-      <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
-        {/* Price section */}
-        <div className="flex items-center">
-          <Skeleton className="w-32 h-8 rounded-lg" />
+      <div className="flex flex-col gap-2">
+        {/* Badges skeleton */}
+        <div className="flex items-center gap-1">
+          <Skeleton className="w-1/4 h-5" />
+          <Skeleton className="w-1/4 h-5" />
         </div>
 
-        {/* Info badges */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <Skeleton className="w-1/3 h-4" />
-          <Skeleton className="w-1/3 h-4" />
-        </div>
-
-        {/* Buttons */}
-        <div className="flex items-center gap-2 mt-2 w-full">
+        {/* Buttons skeleton */}
+        <div className="flex items-center gap-2 mt-auto w-full">
           <Skeleton className="w-full h-8" />
           <Skeleton className="w-full h-8" />
         </div>
