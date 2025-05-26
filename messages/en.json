@@ -1,0 +1,509 @@
+{
+  "Metadata": {
+    "titleForRequest": "General Commission Of Audiovisual Media | Submit an eService",
+    "home": {
+      "title": "General Commission Of Audiovisual Media | Home"
+    },
+    "dashboard": {
+      "title": "General Commission Of Audiovisual Media | Dashboard"
+    },
+    "auth": {
+      "title": "General Commission Of Audiovisual Media | Sign Up - Sign In"
+    },
+    "closed": {
+      "title": "General Commission Of Audiovisual Media | Closed Requests"
+    },
+    "drafts": {
+      "title": "General Commission Of Audiovisual Media | Drafts"
+    },
+    "myRequests": {
+      "title": "General Commission Of Audiovisual Media | My Requests"
+    },
+    "needActions": {
+      "title": "General Commission Of Audiovisual Media | Requests Needing Action"
+    },
+    "profile": {
+      "title": "General Commission Of Audiovisual Media | Profile"
+    },
+    "requestStatus": {
+      "title": "General Commission Of Audiovisual Media | Request Status"
+    },
+    "singleDraft": {
+      "title": "General Commission Of Audiovisual Media | Draft"
+    },
+    "singleService": {
+      "title": "General Commission Of Audiovisual Media | Submit an eService"
+    }
+  },
+  "modeToggle": {
+    "tooltip": "Toggle mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "languagesToggle": {
+    "tooltip": "Language",
+    "arabic": "Arabic",
+    "english": "English",
+    "messages": {
+      "changingLanguage": "Chinging Language",
+      "languageChanged": "Language Changed Successfully",
+      "changeFailed": "Error While Changing Language"
+    }
+  },
+  "HomeNavbar": {
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "pricing": "Pricing"
+    },
+    "cta": "Login",
+    "MobileMenu": {
+      "mainMenu": "Main Menu"
+    }
+  },
+  "AvatarDropdown": {
+    "links": {
+      "profile": "Profile",
+      "logout": "Logout",
+      "help": "Help"
+    }
+  },
+  "HomePage": {
+    "title": "Home",
+    "cta1": "Login",
+    "cta2": "Dashboard",
+    "welcome": "Welcome to the Digital Media Platform",
+    "hero": {
+      "title": "Supercharge Your Digital Media Presence",
+      "description": "Access all digital media services through our unified platform with streamlined processes and instant approvals",
+      "secondaryCta": "Explore Services"
+    },
+    "features": {
+      "title": "Why Choose Our Platform",
+      "description": "We offer a comprehensive suite of tools and services to help you manage all your digital media needs",
+      "fast": {
+        "title": "Lightning Fast",
+        "description": "Get your media services processed in record time with our streamlined approval system"
+      },
+      "secure": {
+        "title": "Secure & Trusted",
+        "description": "Your information is protected with enterprise-grade security and compliance standards"
+      },
+      "global": {
+        "title": "Global Reach",
+        "description": "Connect with audiences worldwide through our comprehensive media service platform"
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "description": "Browse through our comprehensive collection of digital media services"
+    }
+  },
+  "LoginPage": {
+    "title": "Login",
+    "subtitle": "Enter your details to log into your account.",
+    "sessionExpired": "Your session has expired. Please login again.",
+    "welcome": "Welcome Back",
+    "welcomeDescription": "Access all digital media services through our secure platform with streamlined approval processes.",
+    "nafath": "Login via Nafath",
+    "or": "OR",
+    "form": {
+      "username": "Username",
+      "password": "Password",
+      "captchaToken": "Verification Code",
+      "refreshCaptcha": "Refresh Code",
+      "remember": "Remember me for 14 days!",
+      "submit": "Login",
+      "success-login": "Logged in successfully!"
+    },
+    "haveNoAccount": "Don't have an account?",
+    "authenticating": "Authenticating...",
+    "loginFailed": "Login Failed",
+    "returnToLogin": "Return to Login"
+  },
+  "DashboardPage": {
+    "sidebar": {
+      "dashboardLinks": "Dashboard Links",
+      "dashboard": "Dashboard",
+      "home": "Home",
+      "services": "Our Services",
+      "requests": "All Requests",
+      "myRequests": "My Requests",
+      "needActions": "Requests Need Actions",
+      "drafts": "Drafts",
+      "closed": "Closed Requests",
+      "login": "Login",
+      "serviceGroups": "Service Groups",
+      "searchServices": "Search...",
+      "filters": {
+        "group": "Group",
+        "All": "All",
+        "Gaming": "Gaming",
+        "Cinema": "Cinema",
+        "Permits": "Permits",
+        "ProfessionalRegistration": "Professional Registration",
+        "Test": "Test",
+        "NoObjection": "No Objection",
+        "GeneralMediaAuthorityServices": "General Media Authority Services",
+        "MediaMeasurementLicenseRequirements": "Media Measurement License Requirements"
+      }
+    },
+    "UserCard": {
+      "hello": "Hello",
+      "user": "User",
+      "info": "Here you will find the latest information about your media activities.",
+      "viewProfile": "View Profile",
+      "licence": "Trusted License"
+    },
+    "Statistics": {
+      "title": "Quick Statistics",
+      "actionRequests": "Requests Needing Action",
+      "myBills": "Due Bills",
+      "draftRequests": "Drafts",
+      "closedRequests": "Closed Requests"
+    },
+    "Calendar": {
+      "title": "Events",
+      "info": "Click on any day to view available events",
+      "loading": "Loading events...",
+      "events": "Available Events",
+      "noEvents": "No events available",
+      "close": "Close"
+    },
+    "RequestsNeedsActions": {
+      "title": "Requests Needing Action"
+    },
+    "Table": {
+      "id": "ID",
+      "documentType": "Document Type",
+      "createdAt": "Created At",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "MyRequestsPage": {
+    "title": "My Requests",
+    "searchPlaceholder": "Search for a request...",
+    "noData": "No requests available",
+    "numRequests": "Number of requests: ",
+    "selectDate": "Select date...",
+    "statusFilter": "Filter by status...",
+    "search": "Search",
+    "status": {
+      "all": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "Table": {
+      "id": "ID",
+      "documentType": "Document Type",
+      "createdAt": "Creation Date",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "DraftsPage": {
+    "title": "Drafts",
+    "noData": "No drafts available",
+    "clearFilters": "Clear Filters",
+    "searchDrafts": "Search drafts...",
+    "Table": {
+      "id": "ID",
+      "documentType": "Document Type",
+      "createdAt": "Created At",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "NeedActionsPage": {
+    "title": "Requests Needing Action",
+    "noData": "No requests needing action available",
+    "clearFilters": "Clear Filters",
+    "Table": {
+      "id": "ID",
+      "documentType": "Document Type",
+      "createdAt": "Creation Date",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "ClosedRequestsPage": {
+    "title": "Closed Requests",
+    "noData": "No closed requests available",
+    "clearFilters": "Clear Filters",
+    "Table": {
+      "id": "ID",
+      "documentType": "Document Type",
+      "createdAt": "Creation Date",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "SingleServicePage": {
+    "steps": {
+      "step1": "Submit Request",
+      "step2": "Waiting for payment",
+      "step3": "Under Processing",
+      "step4": "Completed",
+      "rejected": "Rejected"
+    },
+    "form": {
+      "saveDraft": "Save Draft",
+      "submit": "Submit",
+      "submitted": "Form Submitted Successfully",
+      "referenceNumber": "Reference Number",
+      "viewRequests": "View My Requests",
+      "successMessage": "Your request has been submitted successfully. Please save your reference number for future reference."
+    },
+    "draft": "Draft: ",
+    "draftSaved": "Your draft has been saved successfully",
+    "draftSaveError": "Error saving draft",
+    "formSubmitted": "Your form has been submitted successfully",
+    "submitError": "Error submitting form",
+    "back": "Back",
+    "confirmSaveDraftTitle": "Save Draft",
+    "confirmSaveDraftMessage": "Are you sure you want to save this form as a draft? You can continue working on it later.",
+    "confirmSubmitTitle": "Submit Form",
+    "confirmSubmitMessage": "Are you sure you want to submit this form? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "errors": {
+      "missingDocumentTypeId": "Missing DocumentTypeId. Please try again or contact support.",
+      "unknown": "Unknown error",
+      "validationFailed": "Form validation failed. Please check all fields.",
+      "networkError": "Network error occurred. Please try again.",
+      "apiError": "API error occurred. Please try again later."
+    }
+  },
+  "DynamicComponents": {
+    "select": {
+      "placeholder": "Select an option",
+      "loading": "Loading options...",
+      "itemsSelected": "options selected",
+      "noOptionsAvailable": "No options available",
+      "searchPlaceholder": "Search for an option...",
+      "selected": "option selected",
+      "clearAll": "Clear all",
+      "remove": "Remove"
+    },
+    "datetime": {
+      "placeholder": "Select a date"
+    },
+    "fileUpload": {
+      "dragAndDrop": "Drag and drop your files here",
+      "dropFilesHere": "Drop files here",
+      "or": "or",
+      "selectFiles": "select files from your computer",
+      "browseFiles": "Browse Files",
+      "acceptedFileTypes": "Accepted file types",
+      "invalidFileType": "{{count}} file(s) have invalid type. Allowed types: {{types}}",
+      "fileTooLarge": "{{count}} file(s) too large. Maximum size: {{size}}",
+      "filesSkipped": "Some files were skipped due to invalid type",
+      "remove": "Remove",
+      "files": "Files",
+      "fileSize": "KB",
+      "gameCoverReady": "Game cover is ready to upload",
+      "fileSizeExceeded": "File size exceeds the maximum allowed size",
+      "invalidFileExtension": "Invalid file extension"
+    },
+    "gridTable": {
+      "empty": "No items added",
+      "emptyDes": "No data has been added to this grid yet. Click the button below to add your first item."
+    },
+    "successMessages": {
+      "fieldUpdated": "Successfully updated {{count}} fields with data from {{field}}"
+    },
+    "errors": {
+      "dataLoadingError": "Error loading information",
+      "validationError": "Please check the form for errors",
+      "networkError": "Network error occurred",
+      "numberMin": "Number must be greater than or equal to {{min}}",
+      "numberMax": "Number must be less than or equal to {{max}}"
+    }
+  },
+  "ServicesPage": {
+    "searchPlaceholder": "Search for a service...",
+    "noData": "No services available",
+    "numServices": "Number of services: ",
+    "filterByGroup": "Filter by Group",
+    "clearFilters": "Clear Filters",
+    "filter": "Filter",
+    "search": "Search",
+    "tryAdjusting": "Try adjusting your search or filters",
+    "clearAllFilters": "Clear All",
+    "ServiceCard": {
+      "licensePeriod": "License Period",
+      "invoiceExpiryDays": "Invoice Expiry",
+      "submitRequest": "Submit Request",
+      "serviceDetails": "Service Details",
+      "monthly": "Monthly",
+      "free": "Free"
+    },
+    "filters": {
+      "group": "Group",
+      "All": "All",
+      "Gaming": "Gaming",
+      "Cinema": "Cinema",
+      "Permits": "Permits",
+      "ProfessionalRegistration": "Professional Registration",
+      "Test": "Test",
+      "NoObjection": "No Objection",
+      "GeneralMediaAuthorityServices": "General Media Authority Services",
+      "MediaMeasurementLicenseRequirements": "Media Measurement License Requirements"
+    }
+  },
+  "ServiceDetailsPage": {
+    "loading": {
+      "title": "Loading Data"
+    }
+  },
+  "FormPage": {
+    "loading": {
+      "title": "Loading Data"
+    },
+    "form": {
+      "submit": "Confirm Submission",
+      "save": "Save",
+      "back": "Back"
+    }
+  },
+  "Requests": {
+    "requestDetails": "Request Details",
+    "paymentRequired": "Payment Required",
+    "payNow": "Pay Now",
+    "steps": {
+      "preparation": "Submit Request",
+      "pending_approval": "Waiting for payment",
+      "under_review": "Under Processing",
+      "completed": "Completed"
+    }
+  },
+  "RequestStatusPage": {
+    "steps": {
+      "preparation": "Submit Request",
+      "payment": "Waiting for payment",
+      "under_review": "Under Processing",
+      "completed": "Completed",
+      "rejected": "Rejected"
+    },
+    "statusCards": {
+      "title": "Current Request Status: ",
+      "pendingPayment": "Pending Payment",
+      "underReview": "Under Review",
+      "rejected": "Rejected",
+      "approved": "Approved"
+    },
+    "rejection_reason": "Rejection Reason",
+    "noData": "No data available",
+    "noDataDescription": "The requested information is not available at this time.",
+    "detailedDataNotAvailable": "No detailed information is available for this request.",
+    "billDetailsNotAvailable": "We are creating the bill for you...",
+    "certificateDetailsNotAvailable": "We are creating the certificate for you...",
+    "tryAgainLater": "Please try again later or contact support.",
+    "error": "An error occurred",
+    "error_description": "There was an issue with the request. Please try again later or contact technical support.",
+    "back": "Back",
+    "summary": "Summary",
+    "service_type": "Service Type",
+    "request_status": "Request Status",
+    "request_data": "Request Data",
+    "bill_data": "Bill Data",
+    "bill_number": "Bill Number",
+    "amount": "Amount",
+    "created_date": "Created Date",
+    "expiry_date": "Expiry Date",
+    "certificate_details": "Certificate Details",
+    "reference_number": "Reference Number",
+    "certificate_status": "Certificate Status",
+    "certificate_document": "Certificate",
+    "certificate": "Certificate",
+    "noDataYet": "No Data Available Yet",
+    "noCertificate": "No Certificate Available",
+    "view_certificate": "View Certificate",
+    "download_certificate": "Download Certificate",
+    "view_bill": "View Bill",
+    "download_bill": "Download Bill",
+    "loading_certificate": "Loading Certificate...",
+    "payment": "Payment",
+    "proceed_to_payment": "Proceed to Payment",
+    "payment_error": "Payment processing error. Please try again.",
+    "title": "Request Status",
+    "status": "Status",
+    "requestId": "Request ID",
+    "documentType": "Document Type",
+    "createdAt": "Created At",
+    "actions": "Actions",
+    "viewDetails": "View Details",
+    "downloadCertificate": "Download Certificate",
+    "untitled_request": "Untitled Request",
+    "yes": "Yes",
+    "no": "No",
+    "report_issue": "Report Issue",
+    "report_description": "If you believe this rejection was made in error, you can submit a report for review.",
+    "submit_report": "Submit Report",
+    "request_rejected": "Request Rejected",
+    "rejection_description": "Your request has been rejected. Please review the details below or submit a report if you believe this was an error."
+  },
+  "Pagination": {
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "items": "items",
+    "rows_per_page": "Rows per page",
+    "previous_page": "Previous page",
+    "next_page": "Next page"
+  },
+  "Footer": {
+    "tagline": "All rights reserved for the General Authority for Media 2025"
+  },
+  "SignUpPage": {
+    "welcome": "Welcome to G-Media",
+    "welcomeDescription": "Create your account to access all media services through our unified platform",
+    "title": "Create Account",
+    "description": "Fill in your details to create your account",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "success": "Registration successful! Please check your email to verify your account.",
+    "error": "Registration failed. Please try again.",
+    "submit": "Create Account",
+    "submitting": "Creating account...",
+    "formError": "Please fill in all required fields",
+    "networkError": "Network error. Please check your connection and try again.",
+    "validationError": "Please check your input and try again",
+    "confirmSubmitTitle": "Confirm Registration",
+    "confirmSubmitMessage": "Are you sure you want to create your account? Please verify your information before proceeding.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "formLoadingError": "Unable to load the registration form. Please try again later."
+  },
+  "ProfilePage": {
+    "title": "Profile",
+    "form": {
+      "nameAr": "Name Ar",
+      "nameEn": "Name En",
+      "email": "Email"
+    }
+  },
+  "common": {
+    "errors": {
+      "invalidUrl": "Invalid URL format. Contains unresolved placeholders.",
+      "apiRequestFailed": "API request failed. Please try again.",
+      "unknown": "Unknown error",
+      "required": "This field is required",
+      "invalidFormat": "Invalid format",
+      "fileTooLarge": "File is too large",
+      "invalidFileType": "Invalid file type"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "delete": "Delete",
+      "edit": "Edit",
+      "add": "Add"
+    }
+  }
+}

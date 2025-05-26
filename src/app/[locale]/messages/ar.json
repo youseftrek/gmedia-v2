@@ -1,0 +1,17 @@
+{
+  "DynamicComponents": {
+    "fileUpload": {
+      "dragAndDrop": "قم بسحب وإفلات الملفات هنا",
+      "dropFilesHere": "افلت الملفات هنا",
+      "or": "أو",
+      "selectFiles": "اختر ملفات من جهازك",
+      "browseFiles": "تصفح الملفات",
+      "acceptedFileTypes": "أنواع الملفات المقبولة",
+      "invalidFileType": "نوع ملف غير صالح. المسموح به:",
+      "fileTooLarge": "الملف كبير جدا. الحجم الأقصى:",
+      "filesSkipped": "تم تخطي بعض الملفات بسبب أخطاء في التحقق",
+      "fileSize": "كيلوبايت",
+      "remove": "إزالة الملف"
+    }
+  }
+}

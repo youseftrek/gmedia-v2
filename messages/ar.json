@@ -1,0 +1,509 @@
+{
+  "Metadata": {
+    "titleForRequest": "الهيئة العامة لتنظيم الإعلام | تقديم خدمة إلكترونية",
+    "home": {
+      "title": "الهيئة العامة لتنظيم الإعلام | الرئيسية"
+    },
+    "dashboard": {
+      "title": "الهيئة العامة لتنظيم الإعلام | لوحة التحكم"
+    },
+    "auth": {
+      "title": "الهيئة العامة لتنظيم الإعلام | التسجيل"
+    },
+    "closed": {
+      "title": "الهيئة العامة لتنظيم الإعلام | الطلبات المغلقة"
+    },
+    "drafts": {
+      "title": "الهيئة العامة لتنظيم الإعلام | المسودات"
+    },
+    "myRequests": {
+      "title": "الهيئة العامة لتنظيم الإعلام | طلباتي"
+    },
+    "needActions": {
+      "title": "الهيئة العامة لتنظيم الإعلام | طلبات بحاجة إلي إجراءات"
+    },
+    "profile": {
+      "title": "الهيئة العامة لتنظيم الإعلام | الملف الشخصي"
+    },
+    "requestStatus": {
+      "title": "الهيئة العامة لتنظيم الإعلام | حالة الطلب"
+    },
+    "singleDraft": {
+      "title": "الهيئة العامة لتنظيم الإعلام | مسودة"
+    },
+    "singleService": {
+      "title": "الهيئة العامة لتنظيم الإعلام | تقديم خدمة"
+    }
+  },
+  "modeToggle": {
+    "tooltip": "تبديل الوضع",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "تلقائي"
+  },
+  "languagesToggle": {
+    "tooltip": "اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية",
+    "messages": {
+      "changingLanguage": "جاري تغيير اللغة",
+      "languageChanged": "تم تغيير اللغة بنجاح",
+      "changeFailed": "حدث خطأ أثناء تغيير اللغة"
+    }
+  },
+  "HomeNavbar": {
+    "links": {
+      "home": "الرئيسية",
+      "about": "حول",
+      "pricing": "الأسعار"
+    },
+    "cta": "تسجيل الدخول",
+    "MobileMenu": {
+      "mainMenu": "القائمة الرئيسية"
+    }
+  },
+  "AvatarDropdown": {
+    "links": {
+      "profile": "الملف الشخصي",
+      "logout": "تسجيل الخروج",
+      "help": "المساعدة"
+    }
+  },
+  "HomePage": {
+    "title": "الرئيسية",
+    "cta1": "تسجيل الدخول",
+    "cta2": "لوحة التحكم",
+    "welcome": "مرحبًا بكم في منصة الإعلام الرقمي",
+    "hero": {
+      "title": "عزز حضورك الإعلامي الرقمي",
+      "description": "الوصول إلى جميع خدمات الإعلام الرقمي من خلال منصتنا الموحدة مع إجراءات مبسطة وموافقات فورية",
+      "secondaryCta": "اعرف المزيد"
+    },
+    "features": {
+      "title": "لماذا تختار منصتنا",
+      "description": "نقدم مجموعة شاملة من الأدوات والخدمات لمساعدتك في إدارة جميع احتياجاتك الإعلامية الرقمية",
+      "fast": {
+        "title": "سرعة فائقة",
+        "description": "احصل على خدماتك الإعلامية في وقت قياسي مع نظام الموافقة المبسط لدينا"
+      },
+      "secure": {
+        "title": "آمن وموثوق",
+        "description": "معلوماتك محمية بأمان على مستوى المؤسسات ومعايير الامتثال"
+      },
+      "global": {
+        "title": "وصول عالمي",
+        "description": "تواصل مع الجماهير في جميع أنحاء العالم من خلال منصة خدمة الإعلام الشاملة لدينا"
+      }
+    },
+    "services": {
+      "title": "خدمـــــاتنا",
+      "description": "تصفح مجموعتنا الشاملة من خدمات الإعلام الرقمي"
+    }
+  },
+  "LoginPage": {
+    "title": "تسجيل الدخول",
+    "subtitle": "أدخل بياناتك لتسجيل الدخول إلى حسابك.",
+    "sessionExpired": "انتهت صلاحية جلستك. الرجاء تسجيل الدخول مرة أخرى.",
+    "welcome": "مرحباً بعودتك",
+    "welcomeDescription": "الوصول إلى جميع خدمات الإعلام الرقمي من خلال منصتنا الآمنة مع إجراءات موافقة مبسطة.",
+    "nafath": "تسجيل الدخول عن طريق نفاذ",
+    "or": "أو",
+    "form": {
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "captchaToken": "رمز التحقق",
+      "refreshCaptcha": "تحديث الرمز",
+      "remember": "تذكرني لمدة 14 يوم!",
+      "submit": "تسجيل الدخول",
+      "success-login": "تم تسجيل الدخول بنجاح!"
+    },
+    "haveNoAccount": "ليس لديك حساب؟",
+    "authenticating": "جاري المصادقة...",
+    "loginFailed": "فشل تسجيل الدخول",
+    "returnToLogin": "العودة إلى تسجيل الدخول"
+  },
+  "DashboardPage": {
+    "sidebar": {
+      "dashboardLinks": "روابط لوحة التحكم",
+      "dashboard": "لوحة التحكم",
+      "home": "الرئيسية",
+      "services": "كل الخدمات",
+      "requests": "جميع الطلبات",
+      "myRequests": "طلباتي",
+      "needActions": "طلبات تحتاج إجراءات",
+      "drafts": "المسودات",
+      "closed": "الطلبات المغلقة",
+      "login": "تسجيل الدخول",
+      "serviceGroups": "مجموعات الخدمات",
+      "searchServices": "البحث...",
+      "filters": {
+        "group": "مجموعة",
+        "All": "الكل",
+        "Gaming": "الألعاب",
+        "Cinema": "السينما",
+        "Permits": "تصاريح",
+        "ProfessionalRegistration": "التسجيل المهني",
+        "Test": "اختبار",
+        "NoObjection": "عدم ممانعة",
+        "GeneralMediaAuthorityServices": "خدمات الهيئة العامة للإعلام",
+        "MediaMeasurementLicenseRequirements": "متطلبات ترخيص قياس الإعلام"
+      }
+    },
+    "UserCard": {
+      "hello": "هلا بك",
+      "user": "أيها المستخدم",
+      "info": "هنا ستجد آخر معلومات نشاطك اﻹعلامي.",
+      "viewProfile": "عرض الملف الشخصي",
+      "licence": "ترخيص موثوق"
+    },
+    "Statistics": {
+      "title": "إحصائيات سريعة",
+      "actionRequests": "الطلبات بحاجة الى إتخاذ إجراء",
+      "myBills": "الفواتير المستحقة",
+      "draftRequests": "المسودات",
+      "closedRequests": "الطلبات المغلقة"
+    },
+    "Calendar": {
+      "title": "الأحداث",
+      "info": "اضغط على أي يوم لعرض الأحداث المتاحة",
+      "loading": "جاري تحميل الأحداث...",
+      "events": "الأحداث المتاحة",
+      "noEvents": "لا يوجد أحداث متاحة",
+      "close": "اغلاق"
+    },
+    "RequestsNeedsActions": {
+      "title": "الطلبات التي تحتاج إجراءات"
+    },
+    "Table": {
+      "id": "الرقم التعريفي",
+      "documentType": "نوع المستند",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    }
+  },
+  "MyRequestsPage": {
+    "title": "طلباتي",
+    "searchPlaceholder": "ابحث عن طلب...",
+    "noData": "لا توجد طلبات متاحة",
+    "numRequests": "عدد الطلبات: ",
+    "selectDate": "حدد التاريخ...",
+    "statusFilter": "ابحث بحسب حالة الطلب...",
+    "search": "ابحث",
+    "status": {
+      "all": "الكل",
+      "pending": "قيد الانتظار",
+      "approved": "تمت الموافقة",
+      "rejected": "مرفوض"
+    },
+    "Table": {
+      "id": "الرقم التعريفي",
+      "documentType": "نوع المستند",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    }
+  },
+  "DraftsPage": {
+    "title": "المسودات",
+    "noData": "لا توجد مسودات متاحة",
+    "clearFilters": "مسح التصفيات",
+    "searchDrafts": "ابحث عن مسودات...",
+    "Table": {
+      "id": "الرقم التعريفي",
+      "documentType": "نوع المستند",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    }
+  },
+  "NeedActionsPage": {
+    "title": "طلبات تحتاج إجراءات",
+    "noData": "لا توجد طلبات تحتاج إجراءات متاحة",
+    "clearFilters": "مسح التصفيات",
+    "Table": {
+      "id": "الرقم التعريفي",
+      "documentType": "نوع المستند",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    }
+  },
+  "ClosedRequestsPage": {
+    "title": "الطلبات المغلقة",
+    "noData": "لا توجد طلبات مغلقة متاحة",
+    "clearFilters": "مسح التصفيات",
+    "Table": {
+      "id": "الرقم التعريفي",
+      "documentType": "نوع المستند",
+      "createdAt": "تاريخ الإنشاء",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    }
+  },
+  "SingleServicePage": {
+    "steps": {
+      "step1": "إعداد الطلب",
+      "step2": "بإنتظار الدفع",
+      "step3": "تحت الإجراء",
+      "step4": "مكتمل",
+      "rejected": "مرفوض"
+    },
+    "form": {
+      "saveDraft": "حفظ كمسودة",
+      "submit": "إرسال",
+      "submitted": "تم تقديم النموذج بنجاح",
+      "referenceNumber": "رقم المرجع",
+      "viewRequests": "عرض طلباتي",
+      "successMessage": "تم تقديم طلبك بنجاح. يرجى حفظ رقم المرجع للرجوع إليه لاحقًا."
+    },
+    "draft": "مسودة: ",
+    "draftSaved": "تم حفظ المسودة بنجاح",
+    "draftSaveError": "خطأ في حفظ المسودة",
+    "formSubmitted": "تم إرسال النموذج بنجاح",
+    "submitError": "خطأ في إرسال النموذج",
+    "back": "رجوع",
+    "confirmSaveDraftTitle": "حفظ المسودة",
+    "confirmSaveDraftMessage": "هل أنت متأكد من حفظ هذا النموذج كمسودة؟ يمكنك متابعة العمل عليه لاحقًا.",
+    "confirmSubmitTitle": "إرسال النموذج",
+    "confirmSubmitMessage": "هل أنت متأكد من إرسال هذا النموذج؟ لا يمكن التراجع عن هذا الإجراء.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "errors": {
+      "missingDocumentTypeId": "معرف نوع المستند مفقود. يرجى المحاولة مرة أخرى أو الاتصال بالدعم.",
+      "unknown": "خطأ غير معروف",
+      "validationFailed": "فشل التحقق من صحة النموذج. يرجى التحقق من جميع الحقول.",
+      "networkError": "حدث خطأ في الشبكة. يرجى المحاولة مرة أخرى.",
+      "apiError": "حدث خطأ في واجهة برمجة التطبيقات. يرجى المحاولة مرة أخرى لاحقًا."
+    }
+  },
+  "DynamicComponents": {
+    "select": {
+      "placeholder": "اختر أحد الخيارات",
+      "loading": "جاري تحميل الخيارات...",
+      "itemsSelected": "خيارات محددة",
+      "noOptionsAvailable": "لا يوجد خيارات متاحة",
+      "searchPlaceholder": "ابحث عن خيار...",
+      "selected": "خيار محدد",
+      "clearAll": "مسح الكل",
+      "remove": "إزالة"
+    },
+    "datetime": {
+      "placeholder": "اختر تاريخ"
+    },
+    "fileUpload": {
+      "dragAndDrop": "اسحب وأفلت الملفات هنا",
+      "dropFilesHere": "أفلت الملفات هنا",
+      "or": "أو",
+      "selectFiles": "اختر ملفات من جهازك",
+      "browseFiles": "استعراض الملفات",
+      "acceptedFileTypes": "أنواع الملفات المقبولة",
+      "invalidFileType": "{{count}} ملف (ملفات) من نوع غير صالح. الأنواع المسموح بها: {{types}}",
+      "fileTooLarge": "{{count}} ملف (ملفات) كبير جدًا. الحجم الأقصى: {{size}}",
+      "filesSkipped": "تم تخطي بعض الملفات بسبب نوع غير صالح",
+      "remove": "إزالة",
+      "files": "الملفات",
+      "fileSize": "كيلوبايت",
+      "gameCoverReady": "غلاف اللعبة جاهز للتحميل",
+      "fileSizeExceeded": "حجم الملف يتجاوز الحد الأقصى المسموح به",
+      "invalidFileExtension": "امتداد الملف غير صالح"
+    },
+    "gridTable": {
+      "empty": "لا توجد عناصر مضافة",
+      "emptyDes": "لم تتم إضافة أي بيانات إلى هذا الجدول بعد. انقر على الزر أدناه لإضافة أول عنصر."
+    },
+    "successMessages": {
+      "fieldUpdated": "تم تحديث {{count}} حقل بنجاح من {{field}}"
+    },
+    "errors": {
+      "dataLoadingError": "خطأ في تحميل المعلومات",
+      "validationError": "يرجى التحقق من الحقول للأخطاء",
+      "networkError": "حدث خطأ في الشبكة",
+      "numberMin": "يجب أن يكون الرقم أكبر من أو يساوي {{min}}",
+      "numberMax": "يجب أن يكون الرقم أقل من أو يساوي {{max}}"
+    }
+  },
+  "common": {
+    "errors": {
+      "invalidUrl": "تنسيق عنوان URL غير صالح. يحتوي على عناصر نائبة غير محلولة.",
+      "apiRequestFailed": "فشل طلب API. يرجى المحاولة مرة أخرى.",
+      "unknown": "خطأ غير معروف",
+      "required": "هذا الحقل مطلوب",
+      "invalidFormat": "تنسيق غير صالح",
+      "fileTooLarge": "حجم الملف كبير جدًا",
+      "invalidFileType": "نوع الملف غير صالح"
+    },
+    "actions": {
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "add": "إضافة"
+    }
+  },
+  "ServicesPage": {
+    "searchPlaceholder": "ابحث عن خدمة...",
+    "noData": "لا توجد خدمات متاحة",
+    "numServices": "عدد الخدمات: ",
+    "filterByGroup": "تصفية بالمجموعة",
+    "clearFilters": "مسح التصفيات",
+    "filter": "التصفية",
+    "search": "البحث",
+    "tryAdjusting": "حاول تعديل البحث أو التصفيات",
+    "clearAllFilters": "مسح الكل",
+    "ServiceCard": {
+      "licensePeriod": "فترة الترخيص",
+      "invoiceExpiryDays": "صلاحية الفاتورة",
+      "submitRequest": "إرسال الطلب",
+      "serviceDetails": "تفاصيل الخدمة",
+      "monthly": "شهرياً",
+      "free": "مجاناً"
+    },
+    "filters": {
+      "group": "مجموعة",
+      "All": "الكل",
+      "Gaming": "الألعاب",
+      "Cinema": "السينما",
+      "Permits": "تصاريح",
+      "ProfessionalRegistration": "التسجيل المهني",
+      "Test": "اختبار",
+      "NoObjection": "عدم ممانعة",
+      "GeneralMediaAuthorityServices": "خدمات الهيئة العامة للإعلام",
+      "MediaMeasurementLicenseRequirements": "متطلبات ترخيص قياس الإعلام"
+    }
+  },
+  "ServiceDetailsPage": {
+    "loading": {
+      "title": "جاري تحميل البيانات"
+    }
+  },
+  "FormPage": {
+    "loading": {
+      "title": "جاري تحميل البيانات"
+    },
+    "form": {
+      "submit": "تأكيد الإرسال",
+      "save": "حفظ",
+      "back": "رجوع"
+    }
+  },
+  "Requests": {
+    "requestDetails": "تفاصيل الطلب",
+    "paymentRequired": "الدفع مطلوب",
+    "payNow": "ادفع الآن",
+    "steps": {
+      "preparation": "تقديم الطلب",
+      "pending_approval": "بانتظار الدفع",
+      "under_review": "تحت الإجراء",
+      "completed": "مكتمل"
+    }
+  },
+  "RequestStatusPage": {
+    "steps": {
+      "preparation": "تقديم الطلب",
+      "payment": "بانتظار الدفع",
+      "under_review": "تحت الإجراء",
+      "completed": "مكتمل",
+      "rejected": "مرفوض"
+    },
+    "statusCards": {
+      "title": "حالة الطلب الحالية: ",
+      "pendingPayment": "بانتظار الدفع",
+      "underReview": "تحت الإجراء",
+      "rejected": "مرفوض",
+      "approved": "موافقة"
+    },
+    "rejection_reason": "سبب الرفض",
+    "noDataDescription": "المعلومات المطلوبة غير متوفرة في الوقت الحالي.",
+    "detailedDataNotAvailable": "لا توجد معلومات مفصلة متاحة لهذا الطلب.",
+    "billDetailsNotAvailable": "جاري إنشاء الفاتورة...",
+    "certificateDetailsNotAvailable": "جاري إنشاء الشهادة...",
+    "tryAgainLater": "يرجى المحاولة مرة أخرى لاحقا أو الاتصال بالدعم.",
+    "error": "حدث خطأ",
+    "error_description": "حدثت مشكلة في الطلب. الرجاء المحاولة مرة أخرى لاحقًا أو الاتصال بالدعم الفني.",
+    "back": "رجوع",
+    "summary": "ملخص",
+    "service_type": "نوع الخدمة",
+    "request_status": "حالة الطلب",
+    "request_data": "بيانات الطلب",
+    "bill_data": "بيانات الفاتورة",
+    "bill_number": "رقم الفاتورة",
+    "amount": "المبلغ",
+    "created_date": "تاريخ الإنشاء",
+    "expiry_date": "تاريخ الانتهاء",
+    "certificate_details": "تفاصيل الشهادة",
+    "reference_number": "الرقم المرجعي",
+    "certificate_status": "حالة الشهادة",
+    "certificate_document": "الشهادة",
+    "certificate": "الشهادة",
+    "noData": "لا توجد بيانات متاحة",
+    "noDataYet": "لا توجد بيانات متاحة بعد",
+    "noCertificate": "لا توجد شهادة متاحة",
+    "view_certificate": "عرض الشهادة",
+    "download_certificate": "تحميل الشهادة",
+    "view_bill": "عرض الفاتورة",
+    "download_bill": "تحميل الفاتورة",
+    "loading_certificate": "جاري تحميل الشهادة...",
+    "payment": "الدفع",
+    "proceed_to_payment": "المتابعة للدفع",
+    "payment_error": "خطأ في معالجة الدفع. يرجى المحاولة مرة أخرى.",
+    "title": "حالة الطلب",
+    "status": "الحالة",
+    "requestId": "رقم الطلب",
+    "documentType": "نوع المستند",
+    "createdAt": "تاريخ الإنشاء",
+    "actions": "الإجراءات",
+    "viewDetails": "عرض التفاصيل",
+    "downloadCertificate": "تحميل الشهادة",
+    "untitled_request": "طلب بدون عنوان",
+    "yes": "نعم",
+    "no": "لا",
+    "report_issue": "الإبلاغ عن مشكلة",
+    "report_description": "إذا كنت تعتقد أن هذا الرفض تم عن طريق الخطأ، يمكنك تقديم تقرير للمراجعة.",
+    "submit_report": "تقديم التقرير",
+    "request_rejected": "تم رفض الطلب",
+    "rejection_description": "تم رفض طلبك. يرجى مراجعة التفاصيل أدناه أو تقديم تقرير إذا كنت تعتقد أن هذا كان خطأ."
+  },
+  "Pagination": {
+    "showing": "عرض",
+    "to": "إلى",
+    "of": "من",
+    "items": "عناصر",
+    "rows_per_page": "صفوف في الصفحة",
+    "previous_page": "الصفحة السابقة",
+    "next_page": "الصفحة التالية"
+  },
+  "Footer": {
+    "tagline": "جميع الحقوق محفوظة للهيئة العامة لتنظيم الإعلام 2025"
+  },
+  "SignUpPage": {
+    "welcome": "مرحباً بك في جي ميديا",
+    "welcomeDescription": "أنشئ حسابك للوصول إلى جميع خدمات الإعلام من خلال منصتنا الموحدة",
+    "title": "إنشاء حساب",
+    "description": "املأ بياناتك لإنشاء حسابك",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "signIn": "تسجيل الدخول",
+    "success": "تم التسجيل بنجاح! يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك.",
+    "error": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
+    "submit": "إنشاء حساب",
+    "submitting": "جاري إنشاء الحساب...",
+    "formError": "يرجى ملء جميع الحقول المطلوبة",
+    "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+    "validationError": "يرجى التحقق من المدخلات والمحاولة مرة أخرى",
+    "confirmSubmitTitle": "تأكيد التسجيل",
+    "confirmSubmitMessage": "هل أنت متأكد من إنشاء حسابك؟ يرجى التحقق من معلوماتك قبل المتابعة.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "loading": "جاري التحميل...",
+    "formLoadingError": "تعذر تحميل نموذج التسجيل. يرجى المحاولة مرة أخرى لاحقاً."
+  },
+  "ProfilePage": {
+    "title": "الملف الشخصي",
+    "form": {
+      "nameAr": "الإسم بالعربية",
+      "nameEn": "الإسم بالإنجليزية",
+      "email": "البريد الإلكتروني"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "DynamicComponents": {
+    "fileUpload": {
+      "dragAndDrop": "Drag and drop files here",
+      "dropFilesHere": "Drop files here",
+      "or": "or",
+      "selectFiles": "select files from your computer",
+      "browseFiles": "Browse Files",
+      "acceptedFileTypes": "Accepted file types",
+      "invalidFileType": "Invalid file type. Allowed:",
+      "fileTooLarge": "File is too large. Maximum size:",
+      "filesSkipped": "Some files were skipped due to validation errors",
+      "fileSize": "KB",
+      "remove": "Remove file"
+    }
+  }
+}

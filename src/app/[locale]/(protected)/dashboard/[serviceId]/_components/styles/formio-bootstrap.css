@@ -1,0 +1,2038 @@
+/* ===== RESET AND BASE STYLES ===== */
+* {
+  box-sizing: border-box;
+}
+
+.formio-container {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: var(--color-foreground);
+}
+
+.formio-container * {
+  color: inherit;
+}
+
+/* Ensure all text is visible */
+.formio-container,
+.formio-container *,
+.formio-form,
+.formio-form * {
+  color: var(--color-foreground) !important;
+}
+
+/* ===== GRID SYSTEM ===== */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Column Classes */
+.col {
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 1;
+}
+
+.col-md-1 {
+  flex: 0 0 8.333333%;
+  max-width: 8.333333%;
+}
+.col-md-2 {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+}
+.col-md-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+.col-md-5 {
+  flex: 0 0 41.666667%;
+  max-width: 41.666667%;
+}
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.col-md-7 {
+  flex: 0 0 58.333333%;
+  max-width: 58.333333%;
+}
+.col-md-8 {
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+.col-md-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+.col-md-10 {
+  flex: 0 0 83.333333%;
+  max-width: 83.333333%;
+}
+.col-md-11 {
+  flex: 0 0 91.666667%;
+  max-width: 91.666667%;
+}
+.col-md-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Responsive behavior */
+@media (max-width: 767px) {
+  .col,
+  [class*="col-md-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ===== FORM COMPONENTS ===== */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 36px;
+  padding: 8px 12px;
+  font-size: 14px !important;
+  line-height: 1.42857143;
+  color: var(--color-foreground) !important;
+  background-color: var(--color-background);
+  background-image: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.form-control:focus {
+  border-color: var(--color-ring);
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--color-ring);
+  color: var(--color-foreground) !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--color-muted);
+  opacity: 1;
+  color: var(--color-muted-foreground) !important;
+}
+
+.form-control::placeholder {
+  color: var(--color-muted-foreground) !important;
+  opacity: 1;
+}
+
+/* Textarea specific */
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  color: var(--color-foreground) !important;
+}
+
+/* Input text visibility */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  color: var(--color-foreground) !important;
+}
+
+/* ===== LABELS ===== */
+.control-label {
+  display: block !important;
+  margin-bottom: 6px !important;
+  font-weight: 600;
+  color: var(--color-foreground) !important;
+  font-size: 14px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  white-space: normal;
+  overflow: hidden !important;
+  hyphens: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+/* Fix for label columns in form */
+.col-md-4 .control-label,
+.col-md-6 .control-label,
+.col-md-12 .control-label {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+
+.field-required::after {
+  content: " *";
+  color: var(--color-destructive) !important;
+  font-weight: bold;
+}
+
+.control-label--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Force label visibility for formio components */
+.formio-component .control-label,
+.formio-component label {
+  display: block !important;
+  color: var(--color-foreground) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 14px !important;
+}
+
+/* Special handling for hidden labels */
+.formio-component-label-hidden .control-label:not(.control-label--hidden) {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  overflow: visible !important;
+}
+
+/* ===== PANELS ===== */
+.panel {
+  margin-bottom: 20px;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-default {
+  border-color: var(--color-border);
+}
+
+.panel-heading {
+  padding: 15px;
+  border-bottom: 1px solid var(--color-border);
+  border-top-left-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-sm);
+  background-color: var(--color-secondary);
+  border-color: var(--color-border);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.panel-heading:hover {
+  background-color: var(--color-muted);
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 16px !important;
+  font-weight: 600;
+  color: var(--color-foreground) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn:focus,
+.btn:active:focus {
+  outline: thin dotted;
+  outline: 5px auto var(--color-ring);
+  outline-offset: -2px;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.btn-default {
+  color: var(--color-foreground);
+  background-color: var(--color-secondary);
+  border-color: var(--color-border);
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  color: var(--color-foreground) !important;
+  background-color: var(--color-muted);
+  border-color: var(--color-border);
+}
+
+.btn-primary {
+  color: #ffffff !important;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  color: #ffffff !important;
+  background-color: var(--color-primary);
+  filter: brightness(90%);
+  border-color: var(--color-primary);
+}
+
+/* Ensure button text is always white in all contexts */
+.formio-button-add-row,
+.formio-button-remove-row,
+button[type="submit"],
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  color: #ffffff !important;
+}
+
+/* Specific buttons in formio components */
+.formio-component .btn-primary,
+.formio-component button[type="submit"],
+.formio-form .btn-primary,
+.formio-form button[type="submit"] {
+  color: #ffffff !important;
+}
+
+/* Add button */
+.formio-button-add-row {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff !important;
+}
+
+.formio-button-add-row:hover,
+.formio-button-add-row:focus {
+  background-color: var(--color-primary);
+  filter: brightness(90%);
+  color: #ffffff !important;
+}
+
+/* Remove button */
+.formio-button-remove-row {
+  background-color: var(--color-destructive);
+  border-color: var(--color-destructive);
+  color: #ffffff !important;
+}
+
+.formio-button-remove-row:hover,
+.formio-button-remove-row:focus {
+  background-color: var(--color-destructive);
+  filter: brightness(90%);
+  color: #ffffff !important;
+}
+
+/* Icon in buttons should be white as well */
+.btn i,
+.btn [class^="glyphicon-"],
+.btn [class*=" glyphicon-"],
+.btn [class^="fa-"],
+.btn [class*=" fa-"] {
+  color: inherit;
+}
+
+/* Dark mode button adjustments */
+.dark .btn-primary,
+.dark .formio-button-add-row,
+.dark button[type="submit"] {
+  color: #ffffff !important;
+}
+
+.dark .btn-default {
+  color: var(--color-foreground);
+  background-color: var(--color-secondary);
+}
+
+/* ===== INPUT GROUPS ===== */
+.input-group {
+  position: relative;
+  display: flex;
+  border-collapse: separate;
+  width: 100%;
+}
+
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.input-group-addon {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-foreground);
+  text-align: center;
+  background-color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* LTR border radius handling */
+.input-group .form-control:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group .form-control:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group-addon:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.input-group-addon:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}
+
+/* RTL border radius handling */
+[dir="rtl"] .input-group .form-control:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+[dir="rtl"] .input-group .form-control:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+}
+
+[dir="rtl"] .input-group-addon:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  border-left: 0;
+  border-right: 1px solid var(--color-border);
+}
+
+[dir="rtl"] .input-group-addon:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+  border-right: 0;
+  border-left: 1px solid var(--color-border);
+}
+
+/* Fix for flatpickr inputs in RTL */
+[dir="rtl"] .flatpickr-input.form-control {
+  direction: rtl;
+}
+
+[dir="rtl"] .input-group .flatpickr-input + input.form-control {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+[dir="rtl"]
+  .input-group
+  .flatpickr-input
+  + input.form-control
+  + .input-group-addon {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+  border-right: 0;
+}
+
+/* Fix for date/time inputs */
+.input-group .flatpickr-input {
+  display: none;
+}
+
+.input-group .flatpickr-input + input.form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+}
+
+/* Icon styling for input groups */
+.input-group-addon i {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* ===== TABLES ===== */
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 10px;
+  vertical-align: middle;
+  color: var(--color-foreground) !important;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--color-border);
+  font-weight: 600;
+  background-color: var(--color-secondary);
+  word-break: break-word;
+  white-space: normal;
+}
+
+.table-bordered {
+  border: 1px solid var(--color-border);
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid var(--color-border);
+}
+
+.datagrid-table {
+  margin-bottom: 0;
+}
+
+/* ===== CHECKBOXES ===== */
+.form-check {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+[dir="rtl"] .form-check {
+  padding-left: 0;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: -20px;
+  width: 16px;
+  height: 16px;
+}
+
+[dir="rtl"] .form-check-input {
+  margin-left: 0;
+  margin-right: -20px;
+  right: 0;
+  left: auto;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--color-foreground) !important;
+  position: relative;
+  display: inline-block;
+  padding-left: 0;
+  /* Ensure text doesn't wrap under the checkbox */
+  min-height: 20px;
+  line-height: 1.5;
+}
+
+[dir="rtl"] .form-check-label {
+  padding-right: 0;
+  text-align: right;
+}
+
+.checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+[dir="rtl"] .checkbox {
+  text-align: right;
+}
+
+.checkbox label {
+  min-height: 20px;
+  padding: 0 0 0 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--color-foreground) !important;
+  position: relative;
+  display: inline-block;
+}
+
+[dir="rtl"] .checkbox label {
+  padding: 0 20px 0 0;
+  text-align: right;
+}
+
+.checkbox input[type="checkbox"] {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: -20px;
+}
+
+[dir="rtl"] .checkbox input[type="checkbox"] {
+  margin-left: 0;
+  margin-right: -20px;
+  right: 0;
+  left: auto;
+}
+
+/* Special handling for confirmation checkboxes */
+.formio-component-checkbox .form-check-label span {
+  display: inline-block;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
+[dir="rtl"] .formio-component-checkbox .form-check-label span {
+  padding-left: 0;
+  padding-right: 5px;
+}
+
+/* Ensure the checkbox appears before the text in RTL */
+[dir="rtl"] .formio-component-checkbox .form-check-label {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .formio-component-checkbox .form-check-input {
+  position: static;
+  margin: 4px 0 0 5px;
+}
+
+/* For standard checkboxes */
+.formio-component-checkbox .form-check {
+  display: flex;
+  align-items: flex-start;
+}
+
+.formio-component-checkbox .form-check-input {
+  flex-shrink: 0;
+  margin-top: 0.2em;
+}
+
+/* Fix for RTL checkbox alignment */
+[dir="rtl"] .formio-component-checkbox .form-check {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+/* Field-required indicator in checkbox labels */
+.form-check-label.field-required span::after {
+  content: " *";
+  color: var(--color-destructive) !important;
+  font-weight: bold;
+}
+
+/* Handle field-required class on the label itself */
+label.field-required.form-check-label span::after {
+  content: " ";
+  color: var(--color-destructive) !important;
+  font-weight: bold;
+}
+
+/* ===== ICONS (FontAwesome replacement) ===== */
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome";
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-calendar::before {
+  content: "\f073"; /* fa-calendar */
+}
+
+.glyphicon-remove-circle::before {
+  content: "\f057"; /* fa-times-circle */
+}
+
+.glyphicon-plus::before {
+  content: "\f067"; /* fa-plus */
+}
+
+/* Alternative if FontAwesome classes are directly available */
+.fa-calendar,
+.fa-times-circle,
+.fa-plus {
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome";
+  font-weight: 900;
+}
+
+/* Fallback for systems without FontAwesome */
+@supports not (font-family: "Font Awesome 5 Free") {
+  .glyphicon-calendar::before {
+    content: "📅";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+      sans-serif;
+  }
+
+  .glyphicon-remove-circle::before {
+    content: "✖";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+      sans-serif;
+  }
+
+  .glyphicon-plus::before {
+    content: "+";
+    font-family: inherit;
+    font-weight: bold;
+  }
+}
+
+/* ===== CHOICES.JS STYLING ===== */
+.choices {
+  position: relative;
+  margin-bottom: 24px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.choices:focus {
+  outline: none;
+}
+
+.choices.is-open {
+  overflow: visible;
+}
+
+.choices[data-type*="select-one"] {
+  cursor: pointer;
+}
+
+.choices[data-type*="select-multiple"] .choices__inner,
+.choices[data-type*="text"] .choices__inner {
+  cursor: text;
+}
+
+.choices__inner {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  background-color: var(--color-background);
+  padding: 6px 7.5px 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  min-height: 36px;
+  overflow: hidden;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: auto;
+  min-height: 36px;
+  max-height: none;
+  flex-wrap: wrap;
+}
+
+.choices__inner:focus,
+.choices__inner:hover {
+  border-color: var(--color-ring);
+  box-shadow: 0 0 0 2px var(--color-ring);
+}
+
+.choices__list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.choices__list--single {
+  display: inline-block;
+  padding: 4px 16px 4px 4px;
+  width: 100%;
+}
+
+.choices__list--multiple {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.choices__list--multiple .choices__item {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 3.75px;
+  margin-bottom: 3.75px;
+  background-color: var(--color-primary);
+  border: none;
+  color: var(--color-primary-foreground) !important;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 10px);
+  box-sizing: border-box;
+  transition: background-color 0.15s ease;
+}
+
+.choices__list--multiple .choices__item:hover {
+  background-color: var(--color-primary);
+  filter: brightness(90%);
+}
+
+.choices__list--dropdown {
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  width: 100%;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-top: 0;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  overflow: hidden;
+  word-break: break-all;
+  will-change: visibility;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.choices__list--dropdown.is-active {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.choices__list--dropdown .choices__list {
+  position: relative;
+  max-height: 300px;
+  overflow: auto;
+  will-change: scroll-position;
+}
+
+.choices__list--dropdown .choices__item {
+  position: relative;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--color-foreground) !important;
+  transition: background-color 0.15s ease;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.choices__item {
+  cursor: default;
+}
+
+.choices__item--selectable {
+  cursor: pointer;
+}
+
+.choices__item--selectable.is-highlighted {
+  background-color: var(--color-muted);
+  color: var(--color-foreground) !important;
+}
+
+.choices__item--choice {
+  color: var(--color-foreground) !important;
+  word-wrap: break-word;
+}
+
+/* Fix for dark mode item selection */
+.dark .choices__item--selectable.is-highlighted {
+  background-color: var(--color-muted);
+  color: var(--color-foreground) !important;
+}
+
+.dark .choices__item--choice {
+  color: var(--color-foreground) !important;
+}
+
+.choices__item--choice.is-selected {
+  color: var(--color-primary-foreground) !important;
+  background-color: var(--color-primary);
+}
+
+.dark .choices__list--dropdown .choices__item {
+  color: var(--color-foreground) !important;
+}
+
+.choices__placeholder {
+  color: var(--color-muted-foreground) !important;
+  opacity: 1;
+}
+
+.choices__input {
+  display: inline-block;
+  vertical-align: baseline;
+  background-color: transparent !important;
+  border: 0;
+  border-radius: 0;
+  max-width: 100%;
+  padding: 4px 0 4px 2px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: inherit;
+  opacity: 1;
+  color: var(--color-foreground) !important;
+}
+
+.choices__input:focus {
+  outline: 0;
+}
+
+.choices__input::placeholder {
+  color: var(--color-muted-foreground) !important;
+  opacity: 1;
+}
+
+/* Fix for dark mode dropdown */
+.dark .choices__list--dropdown {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+.dark .choices__inner {
+  background-color: var(--color-background);
+  border-color: var(--color-border);
+}
+
+/* Fix for dark mode input */
+.dark .choices__input {
+  color: var(--color-foreground) !important;
+  background-color: transparent !important;
+}
+
+/* Improve buttons in choices */
+.choices__button {
+  text-indent: -9999px;
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+  position: relative;
+}
+
+.choices__button:hover,
+.choices__button:focus {
+  opacity: 1;
+}
+
+.choices__button:focus {
+  box-shadow: 0 0 0 2px var(--color-ring);
+}
+
+/* Ensure input text color is always visible */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select,
+.form-control {
+  color: var(--color-foreground) !important;
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark textarea,
+.dark select,
+.dark .form-control {
+  color: var(--color-foreground) !important;
+  background-color: var(--color-background);
+}
+
+/* Custom styling for search inputs in dropdown */
+.choices__list--dropdown input[type="text"] {
+  background-color: transparent !important;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 8px;
+  margin-bottom: 5px;
+  width: calc(100% - 16px);
+  margin-left: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.dark .choices__list--dropdown input[type="text"] {
+  color: var(--color-foreground) !important;
+  background-color: transparent !important;
+}
+
+/* Improve multi-select tag appearance */
+.choices__list--multiple .choices__item {
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.choices__list--multiple .choices__item .choices__button {
+  margin-left: 4px;
+  border-radius: 50%;
+  opacity: 0.7;
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.choices__list--multiple .choices__item .choices__button:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Add specific right-to-left support for Arabic */
+[dir="rtl"] .choices__list--multiple {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+[dir="rtl"] .choices__list--multiple .choices__item {
+  margin-right: 0;
+  margin-left: 3.75px;
+  max-width: calc(100% - 10px);
+}
+
+/* Fix for RTL direction in dropdowns */
+[dir="rtl"] .choices__list--dropdown .choices__item {
+  text-align: right;
+}
+
+/* Table styling */
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 10px;
+  vertical-align: middle;
+  color: var(--color-foreground) !important;
+}
+
+/* Improved form group spacing */
+.form-group {
+  margin-bottom: 24px;
+}
+
+/* Form description and help text */
+.help-block {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-muted-foreground) !important;
+  font-size: 12px;
+}
+
+/* Ensure dropdown button is visible in dark mode */
+.dark .choices__button {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== ERROR MESSAGES ===== */
+.formio-errors {
+  color: var(--color-destructive) !important;
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--color-destructive) !important;
+  font-weight: 500;
+}
+
+.has-feedback .form-control:focus {
+  border-color: var(--color-ring);
+}
+
+.form-control[aria-invalid="true"] {
+  border-color: var(--color-destructive) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: var(--color-destructive) !important;
+  padding-right: calc(1.5em + 0.75rem);
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+[dir="rtl"] .form-control.is-invalid,
+[dir="rtl"] .was-validated .form-control:invalid {
+  background-position: left calc(0.375em + 0.1875rem) center;
+  padding-right: 0.75rem;
+  padding-left: calc(1.5em + 0.75rem);
+}
+
+/* Add red border to invalid select */
+.choices.is-invalid .choices__inner {
+  border-color: var(--color-destructive) !important;
+}
+
+/* Add red color to required field indicators */
+.field-required::after {
+  content: " *";
+  color: var(--color-destructive) !important;
+  font-weight: bold;
+}
+
+/* Error message under each field */
+.formio-component .error {
+  color: var(--color-destructive) !important;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ===== ICONS ===== */
+/* Style all icons */
+.input-group-addon i,
+.formio-component i,
+.button i,
+[class^="glyphicon-"],
+[class*=" glyphicon-"],
+[class^="fa-"],
+[class*=" fa-"] {
+  font-weight: normal;
+  color: var(--color-primary);
+}
+
+/* Calendar icon specific */
+.glyphicon-calendar,
+.fa-calendar,
+.fa-calendar-alt {
+  color: var(--color-primary);
+  font-weight: normal;
+}
+
+/* Remove icon specific */
+.glyphicon-remove-circle,
+.fa-times-circle {
+  color: var(--color-destructive);
+  font-weight: normal;
+}
+
+/* Add icon specific */
+.glyphicon-plus,
+.fa-plus {
+  color: var(--color-primary);
+  font-weight: normal;
+}
+
+/* Icon in button should match button text color */
+.btn i,
+.btn [class^="glyphicon-"],
+.btn [class*=" glyphicon-"],
+.btn [class^="fa-"],
+.btn [class*=" fa-"] {
+  color: inherit;
+}
+
+/* Ensure error icons are red */
+.has-error i,
+.formio-error i,
+.has-error [class^="glyphicon-"],
+.has-error [class*=" glyphicon-"] {
+  color: var(--color-destructive) !important;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* ===== FORMIO SPECIFIC STYLES ===== */
+.formio-form {
+  font-family: inherit;
+}
+
+.formio-component {
+  position: relative;
+}
+
+.formio-component-label-hidden .control-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.formio-button-add-row,
+.formio-button-remove-row {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.formio-button-add-row {
+  margin-top: 10px;
+}
+
+/* Custom hide class */
+.custom-hide {
+  /* Add any specific hiding logic if needed */
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .panel-heading {
+    padding: 10px;
+  }
+
+  .panel-body {
+    padding: 10px;
+  }
+
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .choices__list--dropdown {
+    position: fixed;
+    z-index: 9999;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .form-control,
+  .choices__inner {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-control {
+    border-width: 2px;
+  }
+
+  .btn {
+    border-width: 2px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .btn,
+  .formio-button-add-row,
+  .formio-button-remove-row {
+    display: none;
+  }
+
+  .form-control {
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+
+  .panel {
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+}
+
+/* ===== FILE UPLOAD COMPONENT ===== */
+.formio-component-file .fileSelector {
+  padding: 25px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+.formio-component-file .fileSelector:hover,
+.formio-component-file .fileSelector:focus {
+  border-color: var(--color-primary);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.formio-component-file .fileSelector i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+  color: var(--color-primary);
+}
+
+.formio-component-file .fileSelector a.browse {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.formio-component-file .fileSelector a.browse:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
+  filter: brightness(90%);
+}
+
+/* File list styling */
+.formio-component-file .list-group {
+  margin-bottom: 15px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.formio-component-file .list-group-item {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  padding: 10px 15px;
+}
+
+.formio-component-file .list-group-header {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+  font-weight: 500;
+}
+
+.formio-component-file .list-group-striped > .list-group-item:nth-of-type(odd) {
+  background-color: var(--color-muted);
+}
+
+.formio-component-file
+  .list-group-striped
+  > .list-group-item:nth-of-type(even) {
+  background-color: var(--color-background);
+}
+
+/* File item actions */
+.formio-component-file .file-item-action {
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.formio-component-file .file-item-action:hover {
+  color: var(--color-destructive);
+}
+
+.formio-component-file .file-item-action.file-remove-button {
+  color: var(--color-destructive);
+}
+
+/* Dark mode specific adjustments */
+.dark .formio-component-file .fileSelector {
+  background-color: var(--color-muted);
+  border-color: var(--color-border);
+}
+
+.dark .formio-component-file .fileSelector:hover,
+.dark .formio-component-file .fileSelector:focus {
+  background-color: var(--color-secondary);
+  border-color: var(--color-primary);
+}
+
+.dark .formio-component-file .list-group-item {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+.dark
+  .formio-component-file
+  .list-group-striped
+  > .list-group-item:nth-of-type(odd) {
+  background-color: var(--color-muted);
+}
+
+.dark
+  .formio-component-file
+  .list-group-striped
+  > .list-group-item:nth-of-type(even) {
+  background-color: var(--color-card);
+}
+
+.dark .formio-component-file .list-group-header {
+  background-color: var(--color-secondary);
+}
+
+/* RTL support for file upload */
+[dir="rtl"] .formio-component-file .file-item-action {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+/* File upload progress */
+.formio-component-file .file-progress {
+  height: 5px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-muted);
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.formio-component-file .file-progress-bar {
+  height: 100%;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+/* ===== RADIO BUTTONS ===== */
+.formio-component-radio .input-group {
+  display: block;
+}
+
+.formio-component-radio .radio {
+  position: relative;
+  display: flex !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.formio-component-radio .radio label {
+  min-height: 20px;
+  padding-left: 10px !important;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  position: relative;
+}
+
+.formio-component-radio .radio input[type="radio"] {
+  position: relative !important;
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  margin-top: 0 !important;
+  width: 18px;
+  height: 18px;
+  /* Add primary color for checked state */
+  accent-color: var(--color-primary);
+}
+
+.formio-component-radio .radio label span {
+  margin-left: 5px !important;
+}
+
+/* RTL radio button styles - Enhanced */
+[dir="rtl"] .formio-component-radio .radio {
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: right;
+  padding-right: 0;
+  width: 100%;
+}
+
+[dir="rtl"] .formio-component-radio .radio label {
+  padding-left: 0 !important;
+  padding-right: 10px !important;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  text-align: right;
+  width: 100%;
+  justify-content: space-between;
+}
+
+[dir="rtl"] .formio-component-radio .radio input[type="radio"] {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  order: 2;
+}
+
+[dir="rtl"] .formio-component-radio .radio label span {
+  margin-left: 8px !important;
+  margin-right: 0 !important;
+  text-align: right;
+  order: 1;
+}
+
+/* Fix overall container in RTL */
+[dir="rtl"] .formio-component-radio .input-group {
+  direction: rtl;
+  text-align: right;
+  display: block !important;
+}
+
+/* Additional RTL fixes for radio button alignment */
+[dir="rtl"] .formio-component-radio {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure RTL radio buttons have proper padding/margin */
+[dir="rtl"] .formio-component-radio .radio + .radio {
+  margin-top: 15px;
+}
+
+/* Error states for radio buttons */
+.formio-component-radio.has-error .radio label {
+  color: var(--color-foreground);
+}
+
+.formio-component-radio.has-error .form-check-input.is-invalid {
+  border-color: var(--color-destructive);
+}
+
+.formio-component-radio .invalid-feedback {
+  color: var(--color-destructive) !important;
+  display: block;
+  width: 100%;
+}
+
+/* Make radio button container start from left/right edge in RTL/LTR */
+.formio-component-radio .input-group {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Custom styling for radio buttons and checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--color-primary) !important;
+  cursor: pointer;
+}
+
+/* Additional styling for checkboxes */
+.checkbox input[type="checkbox"],
+.form-check-input[type="checkbox"] {
+  accent-color: var(--color-primary) !important;
+  width: 18px;
+  height: 18px;
+}
+
+/* Add focus styles */
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Fix for old browsers that don't support accent-color */
+@supports not (accent-color: var(--color-primary)) {
+  input[type="radio"]:checked,
+  input[type="checkbox"]:checked {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+}
+
+/* ===== FILE UPLOAD BUTTON ===== */
+/* Ensure file upload button text is always white */
+.formio-component-file .fileSelector {
+  padding: 25px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+/* File upload browse button styling */
+.formio-component-file .fileSelector a.browse {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  border: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.formio-component-file .fileSelector a.browse:hover {
+  background-color: var(--color-primary);
+  filter: brightness(90%);
+  text-decoration: none;
+  color: #ffffff !important;
+}
+
+/* Ensure consistent look in dark mode */
+.dark .formio-component-file .fileSelector a.browse {
+  color: #ffffff !important;
+  background-color: var(--color-primary);
+}
+
+.dark .formio-component-file .fileSelector a.browse:hover {
+  color: #ffffff !important;
+  filter: brightness(90%);
+}
+
+/* Make sure RTL is properly handled in file upload */
+[dir="rtl"] .formio-component-file .fileSelector {
+  text-align: center;
+}
+
+/* ===== TABS COMPONENT STYLING ===== */
+.tab-container {
+  margin-bottom: 20px;
+  font-family: var(--font-sans);
+}
+
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-item {
+  margin-bottom: -1px;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--color-foreground);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+  border-color: var(--color-muted) var(--color-muted) var(--color-border);
+  background-color: var(--color-muted);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  border-color: var(--color-border) var(--color-border) transparent;
+  font-weight: 600;
+}
+
+.tab-content {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  background-color: var(--color-background);
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* RTL support for tabs */
+[dir="rtl"] .nav-tabs {
+  padding-right: 0;
+  padding-left: inherit;
+}
+
+[dir="rtl"] .nav-link {
+  border-top-right-radius: var(--radius-md);
+  border-top-left-radius: var(--radius-md);
+}
+
+/* ===== STYLED TERMS AND CONDITIONS ===== */
+/* Style the terms and conditions HTML */
+.formio-component-htmlelement {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.formio-component-htmlelement ol,
+.formio-component-htmlelement ul {
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+
+[dir="rtl"] .formio-component-htmlelement ol,
+[dir="rtl"] .formio-component-htmlelement ul {
+  padding-right: 25px;
+  padding-left: 0;
+}
+
+.formio-component-htmlelement li {
+  margin-bottom: 10px;
+}
+
+.formio-component-htmlelement strong {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+/* Arabic text in HTML components */
+[dir="rtl"] .formio-component-htmlelement div[style*="direction: rtl"] {
+  text-align: right;
+  color: var(--color-foreground) !important;
+}
+
+/* ===== FILE UPLOAD COMPONENT ENHANCEMENT ===== */
+/* Make file upload more visible in both modes */
+.formio-component-file .fileSelector {
+  padding: 25px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-muted);
+  color: var(--color-foreground) !important;
+}
+
+.formio-component-file .fileSelector i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+  color: var(--color-primary) !important;
+}
+
+/* Browse button consistent styling */
+.formio-component-file .fileSelector a.browse {
+  display: inline-block !important;
+  padding: 5px 15px !important;
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  border-radius: var(--radius-md) !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+
+/* Ensure browse button text is always white */
+.formio-component-file .fileSelector a.browse,
+.dark .formio-component-file .fileSelector a.browse {
+  color: #ffffff !important;
+}
+
+.formio-component-file .fileSelector a.browse:hover,
+.dark .formio-component-file .fileSelector a.browse:hover {
+  filter: brightness(90%);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* File list styling for better visibility in dark mode */
+.dark .formio-component-file .list-group-item {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+  color: var(--color-foreground) !important;
+}
+
+.dark .formio-component-file .list-group-header {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground) !important;
+}
+
+/* ===== CHECKBOX STYLING ===== */
+/* Consistent checkbox styling */
+.formio-component-checkbox .form-check {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.formio-component-checkbox .form-check-input {
+  flex-shrink: 0;
+  margin-top: 0.2em;
+  accent-color: var(--color-primary) !important;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.formio-component-checkbox .form-check-label {
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--color-foreground) !important;
+}
+
+/* RTL checkbox alignment */
+[dir="rtl"] .formio-component-checkbox .form-check {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .formio-component-checkbox .form-check-input {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* ===== MULTI-SELECT STYLING ===== */
+/* Enhance multi-select dropdown */
+.choices[data-type*="select-multiple"] .choices__inner {
+  padding: 6px 7.5px 3px;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground) !important;
+}
+
+.choices__list--multiple .choices__item {
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  border: none;
+}
+
+.choices__list--dropdown {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground) !important;
+}
+
+.choices__list--dropdown .choices__item {
+  color: var(--color-foreground) !important;
+}
+
+.choices__item--selectable.is-highlighted {
+  background-color: var(--color-muted);
+}
+
+.choices__item--choice.is-selected {
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+}
+
+/* Dark mode fixes for choices.js */
+.dark .choices__inner {
+  background-color: var(--color-background);
+  border-color: var(--color-border);
+  color: var(--color-foreground) !important;
+}
+
+.dark .choices__list--dropdown {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+.dark .choices__list--dropdown .choices__item {
+  color: var(--color-foreground) !important;
+}
+
+.dark .choices__list--multiple .choices__item {
+  color: #ffffff !important;
+}
+
+/* ===== PANEL STYLING ===== */
+/* Enhance panel styling */
+.panel {
+  margin-bottom: 20px;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.panel-heading {
+  padding: 15px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+  border-top-left-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-sm);
+}
+
+.panel-title {
+  margin: 0;
+  color: var(--color-foreground) !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.panel-body {
+  padding: 15px;
+  background-color: var(--color-background);
+}
+
+.dark .panel {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+.dark .panel-heading {
+  background-color: var(--color-secondary);
+  border-color: var(--color-border);
+}
+
+/* Fix for HTML components inside panels */
+.panel-body .formio-component-htmlelement p {
+  color: var(--color-foreground) !important;
+  margin-bottom: 10px;
+}
+
+/* Fix focus outline for accessibility */
+.nav-link:focus,
+.form-control:focus,
+.choices__inner:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+.fileSelector:focus,
+.panel-heading:focus {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* Ensure form text is always visible */
+.formio-component,
+.formio-component *,
+.formio-form,
+.formio-form * {
+  color: var(--color-foreground) !important;
+}
+
+/* Make sure button text is always white */
+.btn-primary,
+.formio-component-file .fileSelector a.browse {
+  color: #ffffff !important;
+}

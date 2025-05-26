@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: url(#linear-gradient);
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill: none;
+        stroke-width: 7px;
+      }
+
+      .cls-2 {
+        stroke: url(#linear-gradient-2);
+      }
+
+      .cls-3, .cls-4 {
+        stroke: #00bbbe;
+      }
+
+      .cls-4 {
+        stroke-miterlimit: 10;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="86.08" y1="299.78" x2="269.81" y2="116.05" gradientUnits="userSpaceOnUse">
+      <stop offset=".07" stop-color="#00bbbe"/>
+      <stop offset=".08" stop-color="#01b8bd"/>
+      <stop offset=".29" stop-color="#4274a8"/>
+      <stop offset=".44" stop-color="#6a499b"/>
+      <stop offset=".52" stop-color="#7a3996"/>
+      <stop offset=".59" stop-color="#8a3f90"/>
+      <stop offset=".75" stop-color="#b45181"/>
+      <stop offset=".94" stop-color="#f26b6b"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="156.45" y1="233.79" x2="208.19" y2="182.05" xlink:href="#linear-gradient"/>
+  </defs>
+  <polygon class="cls-3" points="66.13 180.86 10 149.85 10 265.98 66.13 234.98 66.13 180.86"/>
+  <circle class="cls-4" cx="136.63" cy="68.64" r="57.99"/>
+  <circle class="cls-4" cx="229.12" cy="89.76" r="36.87"/>
+  <rect class="cls-1" x="65.88" y="126.48" width="224.12" height="162.87" rx="25.12" ry="25.12"/>
+  <line class="cls-2" x1="135.53" y1="207.92" x2="229.12" y2="207.92"/>
+</svg>
