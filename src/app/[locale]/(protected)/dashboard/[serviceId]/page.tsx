@@ -36,7 +36,7 @@ export default async function SirvicePage({
   return (
     <div className="max-w-5xl mx-auto">
       <AnimatedMultiStepper steps={steps}>
-        <ClientForm formDataObj={parsedForm} />
+        <ClientForm formDataObj={parsedForm} DocumentTypeId={serviceId} />
       </AnimatedMultiStepper>
     </div>
   );
