@@ -579,7 +579,7 @@ const ReportCard = ({ t }: { t: any }) => (
     <CardContent>
       <div className="w-full flex items-center">
         <span className="w-fit aspect-square rounded-full bg-red-500/20 text-500 p-2 mb-2">
-          <FileWarning className="w-8 h-8 text-destructive" />
+          <FileWarning className="w-8 h-8 text-red-500" />
         </span>
       </div>
       <p className="text-muted-foreground mb-4">{t("report_description")}</p>
@@ -638,20 +638,26 @@ export default async function Requeststatus({ params }: Props) {
     (typeof res.data.documentStatus === "string" &&
       res.data.documentStatus.toLowerCase() === "rejected");
 
-  // Define steps dynamically based on whether the request is rejected or not
-  const steps = isRejected
-    ? [
-        { title: t("steps.preparation") },
-        { title: t("steps.payment") },
-        { title: t("steps.under_review") },
-        { title: t("steps.rejected"), color: "text-destructive" },
-      ]
-    : [
-        { title: t("steps.preparation") },
-        { title: t("steps.payment") },
-        { title: t("steps.under_review") },
-        { title: t("steps.completed") },
-      ];
+  // Check if payment step should be included
+  const includePaymentStep = res.data.hasBill === true;
+
+  // Define steps dynamically based on whether the request is rejected or payment is needed
+  let steps = [];
+  if (isRejected) {
+    steps = [
+      { title: t("steps.preparation") },
+      { title: t("steps.payment"), hidden: !includePaymentStep },
+      { title: t("steps.under_review") },
+      { title: t("steps.rejected"), color: "text-red-500" },
+    ];
+  } else {
+    steps = [
+      { title: t("steps.preparation") },
+      { title: t("steps.payment"), hidden: !includePaymentStep },
+      { title: t("steps.under_review") },
+      { title: t("steps.completed") },
+    ];
+  }
 
   return (
     <div className="flex flex-col gap-4 mx-auto w-full max-w-7xl">
@@ -666,6 +672,9 @@ export default async function Requeststatus({ params }: Props) {
       {(() => {
         let currentStep = 0;
 
+        // Calculate adjustment for missing payment step
+        const paymentStepAdjustment = includePaymentStep ? 0 : 1;
+
         // Use statusId to determine the current step
         if ("statusId" in res.data && res.data.statusId) {
           switch (res.data.statusId) {
@@ -674,26 +683,26 @@ export default async function Requeststatus({ params }: Props) {
               break;
             case 21:
             case 20:
-              currentStep = 2; // Under review
+              currentStep = includePaymentStep ? 2 : 1; // Under review (adjusted if no payment)
               break;
             case 15:
-              currentStep = 3; // Rejected (last step)
+              currentStep = includePaymentStep ? 3 : 2; // Rejected (adjusted if no payment)
               break;
             case 42:
-              currentStep = 3; // Success (last step)
+              currentStep = includePaymentStep ? 3 : 2; // Success (adjusted if no payment)
               break;
             default:
-              currentStep = 2; // Default to under review
+              currentStep = includePaymentStep ? 2 : 1; // Default to under review (adjusted if no payment)
           }
         } else {
           // Fallback to the old logic if statusId is not available
           if (isRejected) {
-            currentStep = 3; // Last step in the rejected flow
+            currentStep = includePaymentStep ? 3 : 2; // Last step in the rejected flow (adjusted if no payment)
           } else if (
             res.data.hasBill === false &&
             res.data.hasCertificate === false
           ) {
-            currentStep = 2; // Under review
+            currentStep = includePaymentStep ? 2 : 1; // Under review (adjusted if no payment)
           } else if (
             res.data.hasBill === true &&
             res.data.hasCertificate === false
@@ -701,10 +710,10 @@ export default async function Requeststatus({ params }: Props) {
             if (res.data.billDetails && res.data.billDetails.statusId === 1) {
               currentStep = 1; // Pending payment
             } else {
-              currentStep = 2; // Under review
+              currentStep = includePaymentStep ? 2 : 1; // Under review (adjusted if no payment)
             }
           } else if (res.data.hasCertificate === true) {
-            currentStep = 3; // Completed (last step in the normal flow)
+            currentStep = includePaymentStep ? 3 : 2; // Completed (adjusted if no payment)
           }
         }
 
@@ -713,12 +722,14 @@ export default async function Requeststatus({ params }: Props) {
             {(() => {
               // Only render content for the current step
               if (currentStep === 0) {
+                // Preparation step
                 return (
                   <div className="flex flex-col gap-4">
                     <RequestSummaryAndData res={res} locale={locale} t={t} />
                   </div>
                 );
-              } else if (currentStep === 1) {
+              } else if (currentStep === 1 && includePaymentStep) {
+                // Payment step (only when payment is needed)
                 return (
                   <div className="flex md:flex-row flex-col gap-4 w-full">
                     <div
@@ -785,14 +796,21 @@ export default async function Requeststatus({ params }: Props) {
                     )}
                   </div>
                 );
-              } else if (currentStep === 2) {
+              } else if (
+                (includePaymentStep && currentStep === 2) ||
+                (!includePaymentStep && currentStep === 1)
+              ) {
+                // Under review step (adjusted index based on payment inclusion)
                 return (
                   <div className="flex flex-col gap-4">
                     <RequestSummaryAndData res={res} locale={locale} t={t} />
                   </div>
                 );
-              } else if (currentStep === 3) {
-                // Last step - could be either completed or rejected
+              } else if (
+                (includePaymentStep && currentStep === 3) ||
+                (!includePaymentStep && currentStep === 2)
+              ) {
+                // Last step - could be either completed or rejected (adjusted index)
                 if (isRejected) {
                   return (
                     <div className="flex flex-col lg:flex-row gap-4 w-full">
