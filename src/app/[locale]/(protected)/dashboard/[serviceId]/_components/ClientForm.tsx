@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Formio } from "formiojs";
 import { useSession } from "next-auth/react";
@@ -33,15 +33,59 @@ export default function ClientForm({
   const [isSubmit, setIsSubmit] = useState(false);
   const [referenceNumber, setReferenceNumber] = useState("");
   const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const locale = useLocale();
   const session = useSession();
   const router = useRouter();
   const [formBuilder, setFormBuilder] = useState<any>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+  const headerSubmitButtonRef = useRef<HTMLButtonElement>(null);
 
   // Get translations
   const t = useTranslations("SingleServicePage");
   const formT = useTranslations("SingleServicePage.form");
   const commonT = useTranslations("FormPage.form");
+
+  // Effect to monitor apply-request buttons enabled/disabled state
+  useEffect(() => {
+    if (!isFormBuilt) return;
+
+    // Function to update the button state based on form-io's validation
+    const updateButtonState = () => {
+      // Find the apply-request button managed by form-io
+      const formioButton = document.querySelector(
+        ".apply-request"
+      ) as HTMLButtonElement;
+      if (formioButton) {
+        // Get disabled state from the button managed by form-io
+        const isDisabled = formioButton.disabled;
+        // Update our state
+        setIsFormValid(!isDisabled);
+      }
+    };
+
+    // Set up an observer to watch for attribute changes on the apply-request button
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "disabled") {
+          updateButtonState();
+        }
+      });
+    });
+
+    // Start observing the button
+    const targetButton = document.querySelector(".apply-request");
+    if (targetButton) {
+      observer.observe(targetButton, { attributes: true });
+      // Initial state check
+      updateButtonState();
+    }
+
+    // Clean up observer
+    return () => {
+      observer.disconnect();
+    };
+  }, [isFormBuilt]);
 
   useEffect(() => {
     // Dynamically import formBuilder only on the client side
@@ -109,8 +153,8 @@ export default function ClientForm({
 
         formBuilder.builder.data = formData;
 
-        // Process file uploads before clearing attachments
-        processFileUploads(formData);
+        // Extract file uploads before processing form data
+        const fileUploads = extractFileUploads(formData);
 
         formBuilder.clearAttachmentsFromData(
           formBuilder.builder.data,
@@ -123,11 +167,27 @@ export default function ClientForm({
 
         saveOptions.params.DocumentTypeId = Number(DocumentTypeId);
         saveOptions.params.FormData = JSON.stringify(formBuilder.builder.data);
+
+        // Add extracted files to the form data
+        Object.keys(fileUploads).forEach((key) => {
+          saveOptions.params[key] = fileUploads[key];
+        });
       }
 
       const model = new FormData();
       for (const key in saveOptions.params) {
-        model.append(key, saveOptions.params[key]);
+        if (Array.isArray(saveOptions.params[key])) {
+          // Handle file arrays
+          saveOptions.params[key].forEach((file: any, index: number) => {
+            if (file instanceof File) {
+              model.append(`${key}[${index}]`, file);
+            } else {
+              model.append(`${key}[${index}]`, JSON.stringify(file));
+            }
+          });
+        } else {
+          model.append(key, saveOptions.params[key]);
+        }
       }
 
       // Call API to save form
@@ -168,8 +228,8 @@ export default function ClientForm({
 
         formBuilder.builder.data = formData;
 
-        // Process file uploads before clearing attachments
-        processFileUploads(formData);
+        // Extract file uploads before processing form data
+        const fileUploads = extractFileUploads(formData);
 
         formBuilder.clearAttachmentsFromData(
           formBuilder.builder.data,
@@ -182,11 +242,27 @@ export default function ClientForm({
 
         saveOptions.params.DocumentTypeId = Number(DocumentTypeId);
         saveOptions.params.FormData = JSON.stringify(formBuilder.builder.data);
+
+        // Add extracted files to the form data
+        Object.keys(fileUploads).forEach((key) => {
+          saveOptions.params[key] = fileUploads[key];
+        });
       }
 
       const model = new FormData();
       for (const key in saveOptions.params) {
-        model.append(key, saveOptions.params[key]);
+        if (Array.isArray(saveOptions.params[key])) {
+          // Handle file arrays
+          saveOptions.params[key].forEach((file: any, index: number) => {
+            if (file instanceof File) {
+              model.append(`${key}[${index}]`, file);
+            } else {
+              model.append(`${key}[${index}]`, JSON.stringify(file));
+            }
+          });
+        } else {
+          model.append(key, saveOptions.params[key]);
+        }
       }
 
       // Call API to submit form
@@ -210,44 +286,63 @@ export default function ClientForm({
     }
   };
 
-  // Process file uploads to handle them as binary data
-  const processFileUploads = (formData: any) => {
+  // Extract file uploads from form data
+  const extractFileUploads = (formData: any) => {
+    const fileUploads: Record<string, any[]> = {};
+
     // Recursively process all properties
-    const processObject = (obj: any) => {
+    const processObject = (obj: any, path: string = "") => {
       if (!obj) return;
 
       Object.keys(obj).forEach((key) => {
+        const currentPath = path ? `${path}.${key}` : key;
+
         // Check if it's an array
         if (Array.isArray(obj[key])) {
           // Check if it's a file array
           if (obj[key].length > 0 && isFileObject(obj[key][0])) {
-            // Convert file objects to binary form
-            obj[key].forEach((file: any, index: number) => {
-              if (file && file.url) {
-                // Create a binary representation
-                const binaryFile = convertToBinaryFile(file);
-                if (binaryFile) {
-                  obj[key][index] = binaryFile;
+            // Extract files
+            const files: File[] = [];
+            obj[key].forEach((fileObj: any) => {
+              if (fileObj && fileObj.url) {
+                const file = createFileFromObject(fileObj);
+                if (file) {
+                  files.push(file);
                 }
               }
             });
+
+            // Store files with their original key
+            if (files.length > 0) {
+              fileUploads[key] = files;
+
+              // Replace the original array with placeholder references
+              obj[key] = obj[key].map((fileObj: any) => ({
+                name: fileObj.name,
+                originalName: fileObj.originalName,
+                size: fileObj.size,
+                type: fileObj.type,
+                id: fileObj.id || generateUniqueId(),
+              }));
+            }
           } else {
             // Process each item in the array
-            obj[key].forEach((item: any) => {
+            obj[key].forEach((item: any, index: number) => {
               if (item && typeof item === "object") {
-                processObject(item);
+                processObject(item, `${currentPath}[${index}]`);
               }
             });
           }
         }
         // If it's an object, process it recursively
         else if (obj[key] && typeof obj[key] === "object") {
-          processObject(obj[key]);
+          processObject(obj[key], currentPath);
         }
       });
     };
 
     processObject(formData);
+    return fileUploads;
   };
 
   // Check if an object is a file object
@@ -255,12 +350,12 @@ export default function ClientForm({
     if (!obj || typeof obj !== "object") return false;
 
     // Check for common file properties
-    const fileProps = ["name", "size", "type", "url", "originalName"];
+    const fileProps = ["name", "size", "type"];
     return fileProps.every((prop) => prop in obj);
   };
 
-  // Convert file object to binary representation
-  const convertToBinaryFile = (fileObj: any): any => {
+  // Create a File object from a file data object
+  const createFileFromObject = (fileObj: any): File | null => {
     try {
       if (fileObj.url && fileObj.url.startsWith("data:")) {
         // It's a data URL, extract the binary data
@@ -270,24 +365,21 @@ export default function ClientForm({
           array[i] = binary.charCodeAt(i);
         }
 
-        // Create a File object
-        const file = new File([array], fileObj.originalName, {
+        // Create a File object with the original name
+        return new File([array], fileObj.originalName || fileObj.name, {
           type: fileObj.type,
         });
-
-        // Return a modified object with binary property
-        return {
-          ...fileObj,
-          binary: file,
-          // Keep other properties but mark as binary processed
-          _binaryProcessed: true,
-        };
       }
-      return fileObj;
+      return null;
     } catch (error) {
-      console.error("Error converting file to binary:", error);
-      return fileObj;
+      console.error("Error creating file from object:", error);
+      return null;
     }
+  };
+
+  // Generate a unique ID for file references
+  const generateUniqueId = (): string => {
+    return "#" + Math.random().toString(36).substr(2, 9) + "#";
   };
 
   const openConfirmDialog = () => {
@@ -317,8 +409,9 @@ export default function ClientForm({
             {commonT("save")}
           </Button>
           <Button
-            className="apply-request"
-            disabled={loading}
+            ref={headerSubmitButtonRef}
+            className="apply-request-header"
+            disabled={loading || !isFormValid}
             onClick={openConfirmDialog}
           >
             {commonT("submit")}
@@ -333,6 +426,7 @@ export default function ClientForm({
           {commonT("save")}
         </Button>
         <Button
+          ref={submitButtonRef}
           className="apply-request"
           disabled={loading}
           onClick={openConfirmDialog}
