@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import TooltipChildren from "../ui/TooltipChildren";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface BackButtonProps {
   fallbackPath?: string;
@@ -27,6 +29,7 @@ export function BackButton({
   size = "default",
 }: BackButtonProps) {
   const router = useRouter();
+  const t = useTranslations("BackButton");
 
   const handleGoBack = () => {
     // Try to go back to previous page in history
@@ -40,11 +43,11 @@ export function BackButton({
 
   if (size === "icon") {
     return (
-      <TooltipChildren message={label || "Back"}>
+      <TooltipChildren message={label || t("back")}>
         <Button
           variant={variant}
           size={size}
-          className={className}
+          className={cn(className, "cursor-pointer")}
           onClick={handleGoBack}
         >
           <ChevronLeft className="w-4 h-4 ltr:rotate-180" />

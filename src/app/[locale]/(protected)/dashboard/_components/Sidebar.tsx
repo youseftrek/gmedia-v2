@@ -383,7 +383,7 @@ export function Sidebar({
                   key={group}
                   onClick={() => handleServiceGroupClick(group)}
                   className={cn(
-                    "w-full px-3 py-1.5 text-sm ltr:text-left rtl:text-right rounded-md transition-colors",
+                    "w-full cursor-pointer px-3 py-1.5 text-sm ltr:text-left rtl:text-right rounded-md transition-colors",
                     isServiceGroupActive(group)
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -523,7 +523,6 @@ export function Sidebar({
     return (
       <Sheet open={mobileOpen} onOpenChange={onMobileClose}>
         <SheetContent
-          showCloseButton={false}
           side={isRtl ? "right" : "left"}
           className={cn("p-0 w-[320px]", isRtl ? "rtl" : "ltr")}
         >

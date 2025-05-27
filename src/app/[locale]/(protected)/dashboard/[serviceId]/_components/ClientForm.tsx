@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { BackButton } from "@/components/shared/BackButton";
 
 export default function ClientForm({
   formDataObj,
@@ -107,6 +108,10 @@ export default function ClientForm({
         });
 
         formBuilder.builder.data = formData;
+
+        // Process file uploads before clearing attachments
+        processFileUploads(formData);
+
         formBuilder.clearAttachmentsFromData(
           formBuilder.builder.data,
           saveOptions
@@ -117,7 +122,6 @@ export default function ClientForm({
         );
 
         saveOptions.params.DocumentTypeId = Number(DocumentTypeId);
-        saveOptions.params.id = Number(DocumentTypeId);
         saveOptions.params.FormData = JSON.stringify(formBuilder.builder.data);
       }
 
@@ -131,11 +135,11 @@ export default function ClientForm({
 
       if (response.data) {
         setIsSubmit(false);
-        setDialog(true);
         // Show success message
         setShowSuccessOverlay(true);
+        // Show dialog after animation
         setTimeout(() => {
-          setShowSuccessOverlay(false);
+          setDialog(true);
         }, 3000);
       }
     } catch (error) {
@@ -163,6 +167,10 @@ export default function ClientForm({
         });
 
         formBuilder.builder.data = formData;
+
+        // Process file uploads before clearing attachments
+        processFileUploads(formData);
+
         formBuilder.clearAttachmentsFromData(
           formBuilder.builder.data,
           saveOptions
@@ -173,7 +181,6 @@ export default function ClientForm({
         );
 
         saveOptions.params.DocumentTypeId = Number(DocumentTypeId);
-        saveOptions.params.id = Number(DocumentTypeId);
         saveOptions.params.FormData = JSON.stringify(formBuilder.builder.data);
       }
 
@@ -188,12 +195,8 @@ export default function ClientForm({
       if (response.data && response.data.success) {
         setReferenceNumber(response.data.data);
         setIsSubmit(true);
-        setDialog(true);
-        // Show success message
+        // Show success message first
         setShowSuccessOverlay(true);
-        setTimeout(() => {
-          setShowSuccessOverlay(false);
-        }, 3000);
       } else {
         setErrorMessage(response.data.message || t("errors.unknown"));
         setErrorDialog(true);
@@ -207,24 +210,109 @@ export default function ClientForm({
     }
   };
 
+  // Process file uploads to handle them as binary data
+  const processFileUploads = (formData: any) => {
+    // Recursively process all properties
+    const processObject = (obj: any) => {
+      if (!obj) return;
+
+      Object.keys(obj).forEach((key) => {
+        // Check if it's an array
+        if (Array.isArray(obj[key])) {
+          // Check if it's a file array
+          if (obj[key].length > 0 && isFileObject(obj[key][0])) {
+            // Convert file objects to binary form
+            obj[key].forEach((file: any, index: number) => {
+              if (file && file.url) {
+                // Create a binary representation
+                const binaryFile = convertToBinaryFile(file);
+                if (binaryFile) {
+                  obj[key][index] = binaryFile;
+                }
+              }
+            });
+          } else {
+            // Process each item in the array
+            obj[key].forEach((item: any) => {
+              if (item && typeof item === "object") {
+                processObject(item);
+              }
+            });
+          }
+        }
+        // If it's an object, process it recursively
+        else if (obj[key] && typeof obj[key] === "object") {
+          processObject(obj[key]);
+        }
+      });
+    };
+
+    processObject(formData);
+  };
+
+  // Check if an object is a file object
+  const isFileObject = (obj: any): boolean => {
+    if (!obj || typeof obj !== "object") return false;
+
+    // Check for common file properties
+    const fileProps = ["name", "size", "type", "url", "originalName"];
+    return fileProps.every((prop) => prop in obj);
+  };
+
+  // Convert file object to binary representation
+  const convertToBinaryFile = (fileObj: any): any => {
+    try {
+      if (fileObj.url && fileObj.url.startsWith("data:")) {
+        // It's a data URL, extract the binary data
+        const binary = atob(fileObj.url.split(",")[1]);
+        const array = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          array[i] = binary.charCodeAt(i);
+        }
+
+        // Create a File object
+        const file = new File([array], fileObj.originalName, {
+          type: fileObj.type,
+        });
+
+        // Return a modified object with binary property
+        return {
+          ...fileObj,
+          binary: file,
+          // Keep other properties but mark as binary processed
+          _binaryProcessed: true,
+        };
+      }
+      return fileObj;
+    } catch (error) {
+      console.error("Error converting file to binary:", error);
+      return fileObj;
+    }
+  };
+
   const openConfirmDialog = () => {
     setConfirmDialog(true);
   };
 
-  const closeDialog = () => {
+  const navigateToMyRequests = () => {
+    setShowSuccessOverlay(false);
     setDialog(false);
-    // Redirect to dashboard using Next.js router
-    router.push(`/${locale}/dashboard`);
+    // Redirect to my requests page
+    router.push(`/${locale}/dashboard/my-requests`);
   };
+
+  console.log(formDataObj);
 
   return (
     <div className="container">
-      <div className="container mt-4">
-        <div id="form-container" className="formio-container"></div>
-      </div>
-
-      {isFormBuilt && (
-        <div className="flex items-center gap-2 justify-end mb-8">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <BackButton size="icon" className="rtl:rotate-180" />
+          <h1 className="text-2xl font-bold">
+            {formDataObj.documentTypesBase}
+          </h1>
+        </div>
+        <div className="flex items-center gap-2">
           <Button variant="outline" disabled={loading} onClick={saveRequest}>
             {commonT("save")}
           </Button>
@@ -236,10 +324,33 @@ export default function ClientForm({
             {commonT("submit")}
           </Button>
         </div>
-      )}
+      </div>
+
+      <div id="form-container" className="formio-container"></div>
+
+      <div className="flex items-center gap-2 justify-end mb-8">
+        <Button variant="outline" disabled={loading} onClick={saveRequest}>
+          {commonT("save")}
+        </Button>
+        <Button
+          className="apply-request"
+          disabled={loading}
+          onClick={openConfirmDialog}
+        >
+          {commonT("submit")}
+        </Button>
+      </div>
 
       {/* Success Dialog */}
-      <Dialog open={dialog} onOpenChange={setDialog}>
+      <Dialog
+        open={dialog && !showSuccessOverlay}
+        onOpenChange={(open) => {
+          // Only allow closing if not showing success overlay
+          if (!showSuccessOverlay) {
+            setDialog(open);
+          }
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{formT("submitted")}</DialogTitle>
@@ -251,10 +362,16 @@ export default function ClientForm({
                   <span className="text-green-500">✓</span>
                   {formT("successMessage")}
                 </p>
-                <p className="font-medium">
-                  {formT("referenceNumber")}:{" "}
-                  <span className="text-primary">{referenceNumber}</span>
-                </p>
+                {referenceNumber && (
+                  <div className="bg-gray-100 dark:bg-slate-800 p-3 rounded-lg w-full text-center">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {formT("referenceNumber")}
+                    </p>
+                    <p className="text-lg font-mono font-medium">
+                      {referenceNumber}
+                    </p>
+                  </div>
+                )}
               </div>
             ) : (
               <p className="flex items-center gap-2">
@@ -264,7 +381,9 @@ export default function ClientForm({
             )}
           </div>
           <DialogFooter>
-            <Button onClick={closeDialog}>{formT("viewRequests")}</Button>
+            <Button onClick={navigateToMyRequests}>
+              {formT("viewRequests")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -302,7 +421,7 @@ export default function ClientForm({
         </DialogContent>
       </Dialog>
 
-      {/* Animated Success Overlay */}
+      {/* Animated Success Overlay - Non-closable */}
       <AnimatePresence>
         {showSuccessOverlay && (
           <motion.div
@@ -367,6 +486,24 @@ export default function ClientForm({
                   <p className="text-lg font-mono font-medium">
                     {referenceNumber}
                   </p>
+                </motion.div>
+              )}
+
+              {/* Only show the button in the overlay for submission success */}
+              {isSubmit && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                  className="mt-4 w-full"
+                >
+                  <Button
+                    onClick={navigateToMyRequests}
+                    className="w-full"
+                    size="lg"
+                  >
+                    {formT("viewRequests")}
+                  </Button>
                 </motion.div>
               )}
             </motion.div>

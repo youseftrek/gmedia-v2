@@ -1,4 +1,7 @@
 {
+  "BackButton": {
+    "back": "رجوع"
+  },
   "Metadata": {
     "titleForRequest": "الهيئة العامة لتنظيم الإعلام | تقديم خدمة إلكترونية",
     "home": {

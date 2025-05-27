@@ -721,7 +721,11 @@ export default async function Requeststatus({ params }: Props) {
               } else if (currentStep === 1) {
                 return (
                   <div className="flex md:flex-row flex-col gap-4 w-full">
-                    <div className="flex flex-col gap-4 w-full md:w-3/4">
+                    <div
+                      className={`flex flex-col gap-4 w-full ${
+                        res.data.billDetails ? "md:w-3/4" : "md:w-full"
+                      }`}
+                    >
                       <RequestSummaryAndData res={res} locale={locale} t={t} />
                       <Card className="bg-card">
                         <CardHeader>
@@ -770,13 +774,15 @@ export default async function Requeststatus({ params }: Props) {
                         </CardContent>
                       </Card>
                     </div>
-                    <div className="w-full md:w-1/4">
-                      <PaymentCard
-                        documentId={id}
-                        billDetails={res.data.billDetails}
-                        session={session!}
-                      />
-                    </div>
+                    {res.data.billDetails && (
+                      <div className="w-full md:w-1/4">
+                        <PaymentCard
+                          documentId={id}
+                          billDetails={res.data.billDetails}
+                          session={session!}
+                        />
+                      </div>
+                    )}
                   </div>
                 );
               } else if (currentStep === 2) {

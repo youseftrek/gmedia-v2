@@ -6,28 +6,27 @@ import { cn } from "@/lib/utils";
 import Spinner from "./Spinner";
 
 const buttonVariants = cva(
-  "inline-flex !important items-center !important justify-center !important gap-2 !important whitespace-nowrap !important rounded-md !important text-sm !important font-medium !important transition-all !important disabled:pointer-events-none !important disabled:opacity-50 !important [&_svg]:pointer-events-none !important [&_svg:not([class*='size-'])]:size-4 !important shrink-0 !important [&_svg]:shrink-0 !important outline-none !important focus-visible:border-ring !important focus-visible:ring-ring/50 !important focus-visible:ring-[3px] !important aria-invalid:ring-destructive/20 !important dark:aria-invalid:ring-destructive/40 !important aria-invalid:border-destructive !important",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
         default:
-          "bg-primary !important text-primary-foreground !important shadow-xs !important hover:bg-primary/90 !important",
+          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
         destructive:
-          "bg-destructive !important text-white !important shadow-xs !important hover:bg-destructive/90 !important focus-visible:ring-destructive/20 !important dark:focus-visible:ring-destructive/40 !important dark:bg-destructive/60 !important",
+          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border !important bg-background !important shadow-xs !important hover:bg-accent !important hover:text-accent-foreground !important dark:bg-input/30 !important dark:border-input !important dark:hover:bg-input/50 !important",
+          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
-          "bg-secondary !important text-secondary-foreground !important shadow-xs !important hover:bg-secondary/80 !important",
+          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent !important hover:text-accent-foreground !important dark:hover:bg-accent/50 !important",
-        link: "text-primary !important underline-offset-4 !important hover:underline !important",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default:
-          "h-9 !important px-4 !important py-2 !important has-[>svg]:px-3 !important",
-        sm: "h-8 !important rounded-md !important gap-1.5 !important px-3 !important has-[>svg]:px-2.5 !important",
-        lg: "h-10 !important rounded-md !important px-6 !important has-[>svg]:px-4 !important",
-        icon: "size-9 !important",
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9",
       },
     },
     defaultVariants: {
