@@ -323,6 +323,8 @@ export default function ClientForm({
                 size: fileObj.size,
                 type: fileObj.type,
                 id: fileObj.id || generateUniqueId(),
+                url: "",
+                hash: "",
               }));
             }
           } else {
@@ -391,6 +393,13 @@ export default function ClientForm({
     setDialog(false);
     // Redirect to my requests page
     router.push(`/${locale}/dashboard/my-requests`);
+  };
+
+  const navigateToDrafts = () => {
+    setShowSuccessOverlay(false);
+    setDialog(false);
+    // Redirect to my requests page
+    router.push(`/${locale}/dashboard/drafts`);
   };
 
   console.log(formDataObj);
@@ -583,23 +592,17 @@ export default function ClientForm({
                 </motion.div>
               )}
 
-              {/* Only show the button in the overlay for submission success */}
-              {isSubmit && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                  className="mt-4 w-full"
-                >
-                  <Button
-                    onClick={navigateToMyRequests}
-                    className="w-full"
-                    size="lg"
-                  >
-                    {formT("viewRequests")}
-                  </Button>
-                </motion.div>
-              )}
+              {/* Show the button in the overlay for both submission and draft */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="mt-4 w-full"
+              >
+                <Button onClick={navigateToDrafts} className="w-full" size="lg">
+                  {formT("viewRequests")}
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

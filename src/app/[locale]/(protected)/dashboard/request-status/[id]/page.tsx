@@ -734,7 +734,10 @@ export default async function Requeststatus({ params }: Props) {
                   <div className="flex md:flex-row flex-col gap-4 w-full">
                     <div
                       className={`flex flex-col gap-4 w-full ${
-                        res.data.billDetails ? "md:w-3/4" : "md:w-full"
+                        res.data.billDetails &&
+                        res.data.billDetails.statusId === 1
+                          ? "md:w-3/4"
+                          : "md:w-full"
                       }`}
                     >
                       <RequestSummaryAndData res={res} locale={locale} t={t} />
@@ -745,7 +748,8 @@ export default async function Requeststatus({ params }: Props) {
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          {res.data.billDetails ? (
+                          {res.data.billDetails &&
+                          res.data.billDetails.statusId === 1 ? (
                             <div className="gap-4 grid grid-cols-1 md:grid-cols-2 w-full">
                               <div className="flex items-center gap-2">
                                 <Label>{t("bill_number")}: </Label>
@@ -777,23 +781,23 @@ export default async function Requeststatus({ params }: Props) {
                               </div>
                             </div>
                           ) : (
-                            <NoDataMessage
-                              message={t("noDataYet")}
-                              description={t("billDetailsNotAvailable")}
-                            />
+                            <div className="w-full border border-amber-500/30 bg-amber-500/5 text-amber-700 p-4 rounded-md text-center">
+                              {t("billDetailsNotAvailable")}
+                            </div>
                           )}
                         </CardContent>
                       </Card>
                     </div>
-                    {res.data.billDetails && (
-                      <div className="w-full md:w-1/4">
-                        <PaymentCard
-                          documentId={id}
-                          billDetails={res.data.billDetails}
-                          session={session!}
-                        />
-                      </div>
-                    )}
+                    {res.data.billDetails &&
+                      res.data.billDetails.statusId === 1 && (
+                        <div className="w-full md:w-1/4">
+                          <PaymentCard
+                            documentId={id}
+                            billDetails={res.data.billDetails}
+                            session={session!}
+                          />
+                        </div>
+                      )}
                   </div>
                 );
               } else if (

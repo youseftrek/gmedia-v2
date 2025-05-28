@@ -21,7 +21,7 @@ export default async function middleware(req: NextRequest) {
   const isValidLocale = LOCALES.includes(pathLocale);
 
   // 3. Determine the user's own locale (fallback to "en")
-  let userLocale = "en";
+  let userLocale = "ar";
   if (isAuthenticated) {
     try {
       const { success, data } = await getCurrentUserLang(authResponse);
@@ -31,7 +31,7 @@ export default async function middleware(req: NextRequest) {
         userLocale =
           Object.entries(LOCALE_CODE).find(
             ([_, code]) => code === data.data
-          )?.[0] || "en";
+          )?.[0] || "ar";
       }
     } catch (error) {
       console.error("Failed to get user language:", error);
@@ -45,12 +45,12 @@ export default async function middleware(req: NextRequest) {
 
   // 5. Redirect root path (/) to default locale
   if (pathname === "/") {
-    return NextResponse.redirect(new URL(`/en`, req.nextUrl.origin));
+    return NextResponse.redirect(new URL(`/ar`, req.nextUrl.origin));
   }
 
   // 6. Redirect any non-localized path to user locale or default locale
   if (!isValidLocale && pathname !== "/") {
-    const redirectLocale = isAuthenticated ? userLocale : "en";
+    const redirectLocale = isAuthenticated ? userLocale : "ar";
     return NextResponse.redirect(
       new URL(`/${redirectLocale}${pathname}`, req.nextUrl.origin)
     );
@@ -77,7 +77,7 @@ export default async function middleware(req: NextRequest) {
   if (pathname.includes(PROTECTED_ROUTES.DASHBOARD) && !isAuthenticated) {
     return NextResponse.redirect(
       new URL(
-        `/${pathLocale || "en"}${PUBLIC_ROUTES.LOGIN}`,
+        `/${pathLocale || "ar"}${PUBLIC_ROUTES.LOGIN}`,
         req.nextUrl.origin
       )
     );

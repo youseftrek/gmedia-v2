@@ -77,7 +77,7 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <SessionProvider>{children}</SessionProvider>
             <Toaster
-              invert={false}
+              invert={true}
               richColors
               position={locale === "ar" ? "bottom-left" : "bottom-right"}
             />

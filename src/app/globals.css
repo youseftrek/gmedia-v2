@@ -1,6 +1,18 @@
 /* Global styles for shadcn/ui - do not add Bootstrap imports here */
 @import "tailwindcss";
 @import "tw-animate-css";
+@font-face {
+  font-family: FontAwesome;
+  src: url(/fonts/fontawesome-webfont.eot?v=4.7.0);
+  src: url(/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0)
+      format("embedded-opentype"),
+    url(/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2"),
+    url(/fonts/fontawesome-webfont.woff?v=4.7.0) format("woff"),
+    url(/fonts/fontawesome-webfont.ttf?v=4.7.0) format("truetype"),
+    url(/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -105,5 +117,487 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Glyphicon compatibility for Form.io */
+  .glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: "FontAwesome" !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .glyphicon-calendar:before {
+    content: "\f073";
+  }
+
+  .glyphicon-remove-circle:before {
+    content: "\f057";
+  }
+
+  .glyphicon-plus:before {
+    content: "\f067";
+  }
+
+  .glyphicon-trash:before {
+    content: "\f1f8";
+  }
+
+  .glyphicon-edit:before {
+    content: "\f044";
+  }
+
+  .glyphicon-copy:before {
+    content: "\f0c5";
+  }
+
+  .glyphicon-ok:before {
+    content: "\f00c";
+  }
+
+  .glyphicon-new-window:before {
+    content: "\f08e";
+  }
+
+  .glyphicon-remove:before {
+    content: "\f00d";
+  }
+
+  .glyphicon-refresh:before {
+    content: "\f021";
+  }
+
+  /* formio form label styles */
+  .formio-form label {
+    @apply block text-sm font-medium text-muted-foreground mb-1;
+  }
+
+  .formio-form .form-group {
+    @apply mb-3;
+  }
+
+  /* formio form input styles */
+  .formio-form input {
+    @apply file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 !border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  }
+  .formio-form input:focus {
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+  }
+  .formio-form input:invalid {
+    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+  }
+
+  .form-control.ui.fluid.selection.dropdown {
+    @apply flex flex-col;
+  }
+
+  /* formio form textarea styles */
+  .formio-form textarea {
+    @apply border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  }
+
+  /* formio form select styles */
+  .choices__input.choices__input--cloned {
+    @apply !bg-transparent text-foreground placeholder:text-muted-foreground !border-accent !border !w-full !rounded-md mt-2 !px-2 p-0 m-0 shadow-none;
+  }
+
+  .choices__list.choices__list--dropdown.is-active {
+    @apply !bg-popover text-popover-foreground mt-1 rounded-md border shadow-md z-50;
+  }
+
+  .choices__list.choices__list--dropdown.is-active
+    .choices__item.is-highlighted {
+    @apply !bg-accent text-popover-foreground shadow-md z-50;
+  }
+
+  /* Choices dropdown styling for both modes */
+  .choices__list--dropdown .choices__item {
+    @apply px-3 py-2 text-sm text-foreground;
+  }
+
+  .choices__list--dropdown .choices__item--selectable {
+    @apply cursor-pointer;
+  }
+
+  .choices__list--dropdown .choices__item--selectable:hover,
+  .choices__list--dropdown .choices__item.is-highlighted {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Dark mode specific overrides */
+  .dark .choices__list.choices__list--dropdown.is-active {
+    @apply !bg-popover border-border;
+  }
+
+  .dark .choices__list--dropdown .choices__item {
+    @apply text-popover-foreground;
+  }
+
+  .dark .choices__list--dropdown .choices__item--selectable:hover,
+  .dark .choices__list--dropdown .choices__item.is-highlighted {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .formio-form .formio-choices .form-control {
+    @apply border-input placeholder:text-muted-foreground dark:bg-input/30 !p-0 flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  }
+
+  .formio-form .formio-choices .form-control:focus-within {
+    @apply border-ring ring-ring/50 ring-[3px];
+  }
+
+  .formio-form .formio-choices .choices__list--dropdown {
+    @apply bg-popover text-popover-foreground mt-1 rounded-md border shadow-md z-50;
+  }
+
+  .formio-form .formio-choices .choices__item {
+    @apply px-3 py-2 text-sm;
+  }
+
+  .formio-form .formio-choices .choices__item--choice {
+    @apply hover:bg-accent hover:text-accent-foreground cursor-pointer;
+  }
+
+  .formio-form .formio-choices .choices__item--highlighted {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .formio-form .formio-choices .choices__list--multiple .choices__item {
+    @apply bg-primary text-primary-foreground text-xs rounded-md px-2 py-1 mr-1 border-0;
+  }
+
+  .formio-form .formio-choices .choices__input {
+    @apply bg-transparent focus:outline-none;
+  }
+
+  /* Specific styling for the choices input field */
+  .choices__input.choices__input--cloned {
+    @apply bg-transparent text-foreground placeholder:text-muted-foreground !border-accent !border !w-full !rounded-md mt-2 !px-2 p-0 m-0 shadow-none;
+  }
+
+  /* Add specific styles for long Arabic labels */
+  [dir="rtl"] .formio-form label.control-label {
+    @apply line-clamp-none whitespace-normal break-words text-right w-full;
+  }
+
+  /* Fix for long labels in any direction */
+  .formio-form label.control-label {
+    @apply line-clamp-none whitespace-normal break-words;
+  }
+
+  /* RTL specific form adjustments */
+  [dir="rtl"] .formio-form {
+    @apply text-right;
+  }
+
+  /* Adjust form groups in RTL */
+  [dir="rtl"] .formio-form .form-group {
+    @apply text-right;
+  }
+
+  /* Fix icon alignment in RTL contexts */
+  [dir="rtl"] .formio-form .input-group-addon i {
+    @apply mr-0;
+  }
+
+  /* Fix calendar icon positioning in RTL */
+  [dir="rtl"] .formio-component-datetime .input-group-addon {
+    @apply border-r-0 border-l;
+  }
+
+  /* Fix date display in RTL mode */
+  [dir="rtl"] .flatpickr-input.form-control {
+    @apply text-right;
+  }
+
+  /* Shadcn-style tabs for Form.io */
+  .formio-component-tabs .tab-container {
+    @apply w-full;
+  }
+
+  .formio-component-tabs .nav-tabs {
+    @apply flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground mb-2 border-0 gap-1 flex-wrap;
+  }
+
+  .formio-component-tabs .nav-item {
+    @apply list-none;
+  }
+
+  .formio-component-tabs .nav-link {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm no-underline;
+  }
+
+  .formio-component-tabs .nav-link.active {
+    @apply bg-background text-foreground shadow-sm;
+  }
+
+  .formio-component-tabs .tab-content {
+    @apply mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  .formio-component-tabs .tab-pane {
+    @apply p-4 border rounded-md border-border bg-card;
+  }
+
+  /* HTML element styling */
+  .formio-component-htmlelement {
+    @apply text-foreground;
+  }
+
+  .formio-component-htmlelement ol {
+    @apply space-y-4 list-decimal list-outside ml-5 rtl:mr-5 rtl:ml-0;
+  }
+
+  .formio-component-htmlelement li {
+    @apply pl-1 rtl:pr-1 rtl:pl-0;
+  }
+
+  .formio-component-htmlelement strong {
+    @apply font-medium text-foreground;
+  }
+
+  .formio-component-htmlelement p {
+    @apply text-base leading-7;
+  }
+
+  /* Enhanced panel styling */
+  .formio-form .panel {
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm mb-6 last:mb-0 overflow-hidden;
+  }
+
+  .formio-form .panel .panel-heading {
+    @apply bg-muted px-4 py-3 border-b cursor-pointer;
+  }
+
+  .formio-form .panel .panel-title {
+    @apply text-base font-medium leading-none tracking-tight;
+  }
+
+  .formio-form .panel .panel-body {
+    @apply p-4;
+  }
+
+  /* File upload styling */
+  .formio-component-file .fileSelector {
+    @apply flex flex-col items-center justify-center rounded-md border border-dashed border-input px-6 py-8 text-center transition-colors hover:bg-muted/50 cursor-pointer;
+  }
+
+  .formio-component-file .fileSelector i {
+    @apply text-2xl text-muted-foreground mb-2;
+  }
+
+  .formio-component-file .fileSelector a.browse {
+    @apply text-primary hover:text-primary/80 underline underline-offset-4;
+  }
+
+  .formio-component-file .list-group {
+    @apply rounded-md border border-border overflow-hidden mb-2;
+  }
+
+  .formio-component-file .list-group-item {
+    @apply py-2 px-3 border-b border-border last:border-b-0;
+  }
+
+  .formio-component-file .list-group-header {
+    @apply bg-muted text-muted-foreground text-sm;
+  }
+
+  /* Table styles for datagrid */
+  .formio-form .table {
+    @apply w-full border-collapse;
+  }
+
+  .formio-form .table-bordered {
+    @apply border rounded-md overflow-hidden;
+  }
+
+  .formio-form .table thead th {
+    @apply bg-muted text-muted-foreground p-2 text-sm font-medium text-left;
+  }
+
+  .formio-form .table tbody td {
+    @apply border-t p-2;
+  }
+
+  .formio-form .table tfoot td {
+    @apply border-t p-2;
+  }
+
+  /* Button styles */
+  .formio-form .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+
+  .formio-form .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2;
+  }
+
+  .formio-form .btn-default {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 px-2 py-1;
+  }
+
+  /* Checkbox styles */
+  .formio-form .checkbox {
+    @apply flex items-start space-x-2 space-x-reverse rtl:space-x-reverse;
+  }
+
+  .formio-form .checkbox label {
+    @apply flex cursor-pointer items-center gap-2 text-sm font-normal;
+  }
+
+  .formio-form .checkbox input[type="checkbox"] {
+    @apply h-4 w-4 rounded border border-input bg-background text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .formio-form .checkbox input[type="checkbox"]:checked {
+    @apply bg-primary border-primary text-primary-foreground;
+  }
+
+  /* Icon styles */
+  .formio-form .glyphicon {
+    @apply inline-block;
+  }
+
+  .formio-form .glyphicon-remove-circle {
+    @apply text-destructive;
+  }
+
+  .formio-form .glyphicon-plus {
+    @apply mr-2;
+  }
+
+  .formio-form .glyphicon-calendar {
+    @apply text-muted-foreground;
+  }
+
+  /* Font Awesome icon support */
+  .formio-form .fa {
+    @apply inline-block;
+  }
+
+  /* Button with icons styling */
+  .formio-form .btn i {
+    @apply inline-block align-middle;
+  }
+
+  .formio-form .btn-default i {
+    @apply text-base;
+  }
+
+  .formio-form .btn-primary i {
+    @apply text-primary-foreground;
+  }
+
+  .formio-form .formio-button-remove-row i {
+    @apply text-destructive hover:text-destructive/80;
+  }
+
+  /* Ensure proper icon display in remove buttons */
+  .formio-form .formio-button-remove-row .glyphicon-remove-circle {
+    @apply inline-block text-base text-destructive;
+  }
+
+  /* Icon sizing and spacing */
+  .formio-form i.glyphicon,
+  .formio-form i.fa {
+    @apply text-sm leading-none;
+  }
+
+  /* Specific icon styling for error states */
+  .formio-form .has-error .glyphicon,
+  .formio-form .invalid-feedback .glyphicon {
+    @apply text-destructive;
+  }
+
+  /* Make sure icons in RTL context are properly aligned */
+  [dir="rtl"] .formio-form .btn i {
+    @apply mr-0 ml-2;
+  }
+
+  [dir="rtl"] .formio-form .input-group-addon i {
+    @apply ml-0;
+  }
+
+  /* Input group styles */
+  .formio-form .input-group {
+    @apply flex;
+  }
+
+  .formio-form .input-group-addon {
+    @apply flex items-center justify-center px-3 border border-l-0 border-input rounded-r-md bg-muted;
+  }
+
+  /* RTL input group styles */
+  [dir="rtl"] .formio-form .input-group-addon {
+    @apply border-r-0 border-l rounded-r-none rounded-l-md;
+  }
+
+  [dir="rtl"] .formio-form .input-group input {
+    @apply rounded-l-none rounded-r-md;
+  }
+
+  /* Improve calendar icon visibility */
+  .formio-form .input-group-addon .glyphicon-calendar {
+    @apply text-base text-foreground cursor-pointer;
+  }
+
+  /* Fix calendar icon alignment in RTL */
+  [dir="rtl"] .formio-form .input-group-addon .glyphicon-calendar {
+    @apply inline-flex justify-center items-center w-full h-full;
+  }
+
+  /* Fix flatpickr input alignment */
+  .formio-component-datetime .flatpickr-input {
+    @apply text-left rtl:text-right;
+  }
+
+  /* Fix flatpickr calendar alignment in RTL */
+  [dir="rtl"] .flatpickr-calendar {
+    @apply right-auto left-0;
+  }
+
+  /* Ensure the calendar icon is properly visible in both modes */
+  .formio-form .input-group-addon {
+    @apply min-w-[40px] flex justify-center;
+  }
+
+  /* Error message styling */
+  .formio-form .error {
+    @apply text-destructive text-xs;
+  }
+
+  .formio-form .fileSelector {
+    @apply !bg-accent/40 !text-foreground;
+  }
+
+  /* Required field indicator */
+  .formio-form .field-required:after {
+    content: " *";
+    @apply text-destructive;
+  }
+
+  /* Responsive tabs */
+  @media (max-width: 640px) {
+    .formio-component-tabs .nav-tabs {
+      @apply flex-col h-auto w-full p-1 gap-1;
+    }
+
+    .formio-component-tabs .nav-item {
+      @apply w-full;
+    }
+
+    .formio-component-tabs .nav-link {
+      @apply w-full justify-start text-left rtl:text-right;
+    }
+  }
+
+  /* Specific style for remove row button */
+  .formio-form .formio-button-remove-row {
+    @apply bg-background text-destructive hover:bg-destructive/10 border border-destructive/30;
   }
 }
