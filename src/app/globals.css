@@ -182,11 +182,7 @@
   }
 
   .formio-form .choices__item.choices__item--selectable {
-    @apply !rounded-xl;
-  }
-
-  .formio-form .choices__item.choices__item--selectable:hover {
-    @apply bg-primary text-primary-foreground;
+    @apply !rounded-lg;
   }
 
   /* formio form input styles */
