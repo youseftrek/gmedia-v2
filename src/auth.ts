@@ -33,8 +33,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
 
-          console.log("Response received:", res);
-
           if (res.status !== 200 || !res.data.data.token)
             throw new Error("Invalid credentials");
 

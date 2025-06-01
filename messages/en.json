@@ -36,6 +36,9 @@
     },
     "singleService": {
       "title": "General Commission Of Audiovisual Media | Submit an eService"
+    },
+    "serviceDetails": {
+      "title": "General Commission Of Audiovisual Media | Service Details"
     }
   },
   "modeToggle": {

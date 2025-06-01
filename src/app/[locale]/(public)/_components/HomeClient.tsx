@@ -2,7 +2,7 @@
 
 import MaxWidthWrapper from "@/components/shared/MaxWidthWrapper";
 import { Badge } from "@/components/ui/badge";
-import { Zap, ChevronDown } from "lucide-react";
+import { Zap } from "lucide-react";
 import ServicesCardsWithFilters from "./ServicesCardaWithFilters";
 import { ScaleIn, FadeIn, SlideIn } from "@/components/ui/layout-animations";
 import AnimateInView from "@/components/ui/animate-in-view";
@@ -103,7 +103,6 @@ export default function HomeClient({ session, translations }: HomeClientProps) {
                   className="px-8 h-11 text-base"
                 >
                   {secondaryCta || "Explore Services"}
-                  <ChevronDown className="ml-2 w-4 h-4 transition-all group-hover:translate-y-1" />
                 </AnimatedButton>
               </div>
             </SlideIn>

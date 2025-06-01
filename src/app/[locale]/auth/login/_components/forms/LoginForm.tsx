@@ -54,7 +54,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
 
       if (res.success && res.data?.data) {
         const { captchaImage, guidId } = res.data.data;
-        console.log("guid", guidId);
+
         setCaptchaData({ image: captchaImage, guid: guidId });
         form.setValue("guid", guidId);
       } else {
@@ -75,8 +75,6 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const onSubmit = async (values: z.infer<typeof UserLoginSchema>) => {
     try {
       const res = await login(values, locale);
-
-      console.log("Client Login res: ", res);
 
       if (res.success) {
         // Get the session to access the token

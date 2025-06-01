@@ -44,7 +44,6 @@ export default function StatisticsSection({
   counters,
 }: StatisticsSectionProps) {
   const t = useTranslations("DashboardPage");
-  console.log("COUNTERS: ", counters);
 
   return (
     <Card className="relative bg-background p-6 w-full h-full">

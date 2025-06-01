@@ -10,7 +10,6 @@ export async function getCurrentUserLang(session: Session) {
 
     return { success: true, data: res };
   } catch (error) {
-    console.log(error);
     return { success: false, error: "changeLangFailedToGet" };
   }
 }

@@ -7,7 +7,6 @@ export async function getCaptcha() {
     );
     return { success: true, data: res };
   } catch (error) {
-    console.log(error);
     return { success: false, error: "captchaFailedToGet" };
   }
 }

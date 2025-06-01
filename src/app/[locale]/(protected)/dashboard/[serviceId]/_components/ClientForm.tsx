@@ -45,6 +45,8 @@ export default function ClientForm({
   const t = useTranslations("SingleServicePage");
   const formT = useTranslations("SingleServicePage.form");
   const commonT = useTranslations("FormPage.form");
+  const dashboardT = useTranslations("DashboardPage.sidebar");
+  const backButtonT = useTranslations("BackButton");
 
   // Effect to monitor apply-request buttons enabled/disabled state
   useEffect(() => {
@@ -398,34 +400,16 @@ export default function ClientForm({
   const navigateToDrafts = () => {
     setShowSuccessOverlay(false);
     setDialog(false);
-    // Redirect to my requests page
+    // Redirect to drafts page
     router.push(`/${locale}/dashboard/drafts`);
   };
-
-  console.log(formDataObj);
 
   return (
     <div className="container">
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <BackButton size="icon" className="rtl:rotate-180" />
-          <h1 className="text-2xl font-bold">
-            {formDataObj.documentTypesBase}
-          </h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" disabled={loading} onClick={saveRequest}>
-            {commonT("save")}
-          </Button>
-          <Button
-            ref={headerSubmitButtonRef}
-            className="apply-request-header"
-            disabled={loading || !isFormValid}
-            onClick={openConfirmDialog}
-          >
-            {commonT("submit")}
-          </Button>
-        </div>
+        <h1 className="text-2xl font-bold">{formDataObj.documentTypesBase}</h1>
+
+        <BackButton label={backButtonT("back")} />
       </div>
 
       <div id="form-container" className="formio-container"></div>
@@ -484,9 +468,13 @@ export default function ClientForm({
             )}
           </div>
           <DialogFooter>
-            <Button onClick={navigateToMyRequests}>
-              {formT("viewRequests")}
-            </Button>
+            {isSubmit ? (
+              <Button onClick={navigateToMyRequests}>
+                {formT("viewRequests")}
+              </Button>
+            ) : (
+              <Button onClick={navigateToDrafts}>{dashboardT("drafts")}</Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -599,9 +587,23 @@ export default function ClientForm({
                 transition={{ delay: 1 }}
                 className="mt-4 w-full"
               >
-                <Button onClick={navigateToDrafts} className="w-full" size="lg">
-                  {formT("viewRequests")}
-                </Button>
+                {isSubmit ? (
+                  <Button
+                    onClick={navigateToMyRequests}
+                    className="w-full"
+                    size="lg"
+                  >
+                    {formT("viewRequests")}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={navigateToDrafts}
+                    className="w-full"
+                    size="lg"
+                  >
+                    {dashboardT("drafts")}
+                  </Button>
+                )}
               </motion.div>
             </motion.div>
           </motion.div>

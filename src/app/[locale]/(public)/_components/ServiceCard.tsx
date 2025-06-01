@@ -49,38 +49,35 @@ const ServiceCard = ({ service }: Props) => {
       key={service.documentTypeId}
       className="flex flex-col justify-between p-6 min-h-[300px] hover:scale-[102%] transition-all duration-300 bg-linear-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border-slate-200 dark:border-slate-800 overflow-hidden relative group"
     >
-      {/* Decorative elements */}
-      {/* <div className="absolute -z-10 -top-10 -right-10 w-60 h-60 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/15 transition-all duration-500"></div>
-      <div className="absolute -z-10 -bottom-8 -left-8 w-60 h-60 bg-[#00bbbe]/5 rounded-full blur-lg group-hover:bg-[#00bbbe]/10 transition-all duration-500"></div> */}
-
-      <div className="relative z-10 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-4">
-          <div className="relative overflow-hidden rounded-lg w-12 h-12 flex items-center justify-center bg-primary/10 dark:bg-primary/20">
-            <Image
-              src={`/images/gmedia/${service.imageName}`}
-              alt={service.imageName || "service"}
-              width={30}
-              height={30}
-              className="object-contain transition-transform duration-300 group-hover:scale-110"
-            />
+      <div className="relative z-10 flex flex-col justify-between h-full">
+        <div>
+          <div className="flex justify-between items-start mb-4">
+            <div className="relative overflow-hidden rounded-lg w-12 h-12 flex items-center justify-center bg-secondary">
+              <Image
+                src={`/images/gmedia/${service.imageName}`}
+                alt={service.imageName || "service"}
+                width={30}
+                height={30}
+                className="object-contain transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+            <Badge className="bg-secondary/60 hover:bg-secondary/80 text-foreground text-xs font-medium px-2.5 py-1">
+              {t(`filters.${service.group}`)}
+            </Badge>
           </div>
-          <Badge className="bg-secondary/60 hover:bg-secondary/80 text-foreground text-xs font-medium px-2.5 py-1">
-            {t(`filters.${service.group}`)}
-          </Badge>
+
+          <h2 className="mb-2 font-semibold text-[#25155c] dark:text-white text-lg tracking-tight transition-colors">
+            {service.title}
+          </h2>
+
+          <div className="grow mb-4">
+            <p className="text-muted-foreground text-xs line-clamp-3">
+              {service.description}
+            </p>
+          </div>
         </div>
-
-        <h2 className="mb-2 font-semibold text-primary dark:text-white text-lg tracking-tight transition-colors">
-          {service.title}
-        </h2>
-
-        <div className="grow mb-4">
-          <p className="text-muted-foreground text-xs line-clamp-3">
-            {service.description}
-          </p>
-        </div>
-
         {/* Price section - always in the same position */}
-        <div className="mb-4 h-[36px] flex items-center">
+        <div className="flex items-center">
           {hasFees ? (
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 rtl:flex-row-reverse px-3 py-1.5 bg-primary/5 dark:bg-primary/10 rounded-lg">
@@ -111,17 +108,21 @@ const ServiceCard = ({ service }: Props) => {
 
       <div className="flex flex-col gap-3 mt-auto pt-3 border-t border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="flex items-center text-xs text-muted-foreground">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <CalendarClock className="w-3.5 h-3.5 mr-1 text-primary/70" />
-            <span>{t("ServiceCard.licensePeriod")}: </span>
-            <span className="font-medium ml-1">{service.licensePeriod}</span>
+            <p>
+              {t("ServiceCard.licensePeriod")}:{" "}
+              <span className="font-medium ml-1">{service.licensePeriod}</span>
+            </p>
           </div>
-          <div className="flex items-center text-xs text-muted-foreground">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Clock className="w-3.5 h-3.5 mr-1 text-primary/70" />
-            <span>{t("ServiceCard.invoiceExpiryDays")}: </span>
-            <span className="font-medium ml-1">
-              {service.invoiceExpiryDays}
-            </span>
+            <p>
+              {t("ServiceCard.invoiceExpiryDays")}:{" "}
+              <span className="font-medium ml-1">
+                {service.invoiceExpiryDays}
+              </span>
+            </p>
           </div>
         </div>
 

@@ -31,8 +31,6 @@ export async function getRequestDetails(
       }
     );
 
-    console.log("Basic Info: ", basicInfo.data);
-
     return basicInfo.data;
   } catch (error) {
     console.error("Error while getting form data:", error);
@@ -65,7 +63,6 @@ export async function getCertificateDetails(
         },
       }
     );
-    console.log("Certificate Details: ", resquestDetails.data);
   } catch (error) {
     console.error("Error while getting form data:", error);
     return {
@@ -82,7 +79,6 @@ export async function checkHasBill(requestId: number, session: Session) {
         Authorization: `Bearer ${session?.token}`,
       },
     });
-    console.log("If Has Bill: ", hasBill.data);
   } catch (error) {
     console.error("Error while getting form data:", error);
     return {
@@ -99,7 +95,6 @@ export async function getBillDetails(requestId: number, session: Session) {
         Authorization: `Bearer ${session?.token}`,
       },
     });
-    console.log("Bill details: ", Bill.data);
   } catch (error) {
     console.error("Error while getting form data:", error);
     return {

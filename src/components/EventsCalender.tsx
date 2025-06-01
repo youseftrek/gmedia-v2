@@ -177,14 +177,14 @@ export default function EventsCalender({ calendar }: { calendar: any }) {
     <div className="w-full">
       <Card className="relative w-full bg-background">
         <Particles
-          className="absolute inset-0 -z-10 h-full"
+          className="absolute inset-0 h-full"
           quantity={20}
           ease={80}
           color="#7a3996"
           refresh
         />
         <Particles
-          className="absolute inset-0 -z-10 h-full"
+          className="absolute inset-0 h-full"
           quantity={10}
           ease={80}
           color="#00bbbe"
@@ -196,6 +196,7 @@ export default function EventsCalender({ calendar }: { calendar: any }) {
             {loading ? t("loading") : t("info")}
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <div className="bg-background mx-auto w-fit z-30">
             <Calendar

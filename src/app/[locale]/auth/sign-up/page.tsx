@@ -16,10 +16,6 @@ async function getRegistrationForm(locale: string) {
     );
 
     // Log the API response for debugging
-    console.log(
-      "Registration API Response:",
-      JSON.stringify(response.data, null, 2)
-    );
 
     return response.data;
   } catch (error) {
@@ -80,9 +76,6 @@ export default async function SignUpPage({ params }: Props) {
     formData: {},
     documentTypesBase: formData.documentTypesBase || "",
   };
-
-  // Log the final formatted data
-  console.log("Enhanced Form Data:", JSON.stringify(enhancedFormData, null, 2));
 
   return <SignUpClient formData={enhancedFormData} />;
 }

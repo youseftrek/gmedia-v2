@@ -1,7 +1,7 @@
 import "../globals.css";
 import { LocaleType } from "@/i18n/request";
 import { DIRECTIONS } from "../../constants/locale";
-import { Outfit } from "next/font/google";
+import { IBM_Plex_Sans_Arabic, Outfit } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -17,13 +17,11 @@ const FONT_EN = Outfit({
   preload: true,
 });
 
-// System font stack for Arabic
-const arabicFontFamily =
-  "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
-
-// export const metadata: Metadata = {
-//   title: "الهيئة العامة لتنظيم الإعلام | General Authority of Media Regulation",
-// };
+const FONT_AR = IBM_Plex_Sans_Arabic({
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  preload: true,
+});
 
 export default async function RootLayout({
   children,
@@ -56,9 +54,8 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         className={`${
-          locale === "ar" ? "" : FONT_EN.className
+          locale === "ar" ? FONT_AR.className : FONT_EN.className
         } antialiased w-full h-full overflow-y-auto`}
-        style={locale === "ar" ? { fontFamily: arabicFontFamily } : undefined}
       >
         <NextTopLoader
           color="#7a3996"

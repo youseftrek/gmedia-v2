@@ -9,10 +9,8 @@ export async function getEservices(locale: string) {
       },
     });
 
-    console.log("API CLIENT RES: ", res);
     return { success: true, data: res };
   } catch (error) {
-    console.log(error);
     return { success: false, error: "servicesFailedToGet" };
   }
 }

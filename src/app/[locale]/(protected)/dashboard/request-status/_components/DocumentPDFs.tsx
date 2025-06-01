@@ -37,8 +37,6 @@ export default function DocumentPDFs({
   const [billLoading, setBillLoading] = useState(true);
   const [billDialogOpen, setBillDialogOpen] = useState(false);
 
-  console.log("dataadad: ", certificateData);
-
   useEffect(() => {
     // Fetch bill PDF
     const fetchBillPdf = async () => {

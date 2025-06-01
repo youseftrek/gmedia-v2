@@ -23,7 +23,6 @@ export async function getCounters(session: Session) {
     // Handle 401 Unauthorized errors
     const axiosError = error as AxiosError;
     if (axiosError.response?.status === 401) {
-      console.log("Authentication failed, redirecting to login");
       redirect("/auth/login?callbackUrl=/dashboard&error=session_expired");
     }
 

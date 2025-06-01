@@ -92,7 +92,6 @@ export default function SignUpClient({ formData }: Props) {
 
     try {
       setIsSubmitting(true);
-      console.log("Submitting registration form with data:", data);
 
       const response = await axios.post("https://e-stg.sa/api/sign-up", data, {
         headers: {

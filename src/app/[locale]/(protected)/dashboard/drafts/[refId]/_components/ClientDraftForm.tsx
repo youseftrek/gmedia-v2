@@ -397,8 +397,6 @@ export default function ClientDraftForm({
     router.push(`/${locale}/dashboard/my-requests`);
   };
 
-  console.log("Draft Form Data: ", formDataObj);
-
   return (
     <div className="container">
       <div className="flex items-center justify-between mb-6">

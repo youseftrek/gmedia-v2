@@ -29,7 +29,6 @@ type Props = {
 
 const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
   // const { data: session, status } = useSession();
-  console.log(session, status);
   const [currSession, setCurrSession] = useState(session);
   const t = useTranslations("AvatarDropdown");
   const locale = useLocale();
@@ -45,7 +44,6 @@ const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
       await signOut();
       toast.success("Logged out successfully");
     } catch (error) {
-      console.log(error);
       toast.error("Failed to logout");
     }
   };

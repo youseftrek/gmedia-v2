@@ -24,7 +24,6 @@ export default async function SirvicePage({
   const { serviceId, locale } = await params;
   const formRes = await getFormData(Number(serviceId), session!, locale);
   const parsedForm = convertFormDataToJSON(formRes.data);
-  console.log("parsedForm data loaded:", !!parsedForm);
 
   const steps = [
     { title: t("steps.step1") },

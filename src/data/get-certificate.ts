@@ -24,7 +24,6 @@ export async function getCertificate(
 
     return { success: true, data: base64Data };
   } catch (error) {
-    console.log(error);
     return { success: false, error: "certificateFailedToGet" };
   }
 }

@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -10,22 +9,32 @@ import {
   FileText,
   ArrowRight,
   ExternalLink,
-  Zap,
   Shield,
   Calendar,
-  Star,
   Target,
-  Award,
   Sparkles,
   Info,
-  Phone,
-  Mail,
   Download,
 } from "lucide-react";
-import { Particles } from "@/components/magicui/particles";
 import { BackButton } from "@/components/shared/BackButton";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Metadata");
+
+  return {
+    title: t("serviceDetails.title"),
+  };
+}
 
 const ServiceInfoPage = () => {
   const serviceData = {
@@ -122,10 +131,8 @@ const ServiceInfoPage = () => {
           {/* Left Sidebar - Combined Card */}
           <div className="md:w-1/3 md:sticky md:top-4">
             <Card className="shadow-sm bg-background">
-              <CardHeader className="pb-2 p-3 sm:p-4 border-b">
-                <CardTitle className="text-sm sm:text-base">
-                  معلومات الخدمة
-                </CardTitle>
+              <CardHeader className="border-b">
+                <CardTitle>معلومات الخدمة</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 {/* Target Audience */}
@@ -193,7 +200,7 @@ const ServiceInfoPage = () => {
           <div className="md:w-2/3">
             {/* Service Header */}
             <Card className="shadow-sm bg-background mb-4 sm:mb-6 relative">
-              <CardContent className="p-3 sm:p-6">
+              <CardContent className="">
                 <div className="flex flex-col space-y-3 sm:space-y-4">
                   <div className="flex justify-between">
                     <h2 className="text-xl sm:text-2xl font-bold line-clamp-2">
@@ -241,14 +248,14 @@ const ServiceInfoPage = () => {
                   المتطلبات
                 </TabsTrigger>
                 <TabsTrigger value="faq" className="flex-1 text-xs sm:text-sm">
-                  المتطلبات والأسئلة الشائعة
+                  الأسئلة الشائعة
                 </TabsTrigger>
               </TabsList>
 
               {/* Steps Tab */}
               <TabsContent value="steps" className="space-y-4 sm:space-y-6">
                 <Card className="shadow-sm bg-background">
-                  <CardHeader className="p-3 sm:p-4 pb-2">
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                       <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       خطوات تقديم الطلب
@@ -284,7 +291,7 @@ const ServiceInfoPage = () => {
                 className="space-y-4 sm:space-y-6"
               >
                 <Card className="shadow-sm bg-background">
-                  <CardHeader className="p-3 sm:p-4 pb-2">
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                       <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       شروط الخدمة
@@ -314,7 +321,7 @@ const ServiceInfoPage = () => {
                 className="space-y-4 sm:space-y-6"
               >
                 <Card className="shadow-sm bg-background">
-                  <CardHeader className="p-3 sm:p-4 pb-2">
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                       <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       المتطلبات والوثائق المطلوبة
@@ -342,39 +349,40 @@ const ServiceInfoPage = () => {
               <TabsContent value="faq" className="space-y-4 sm:space-y-6">
                 {/* FAQ Section */}
                 <Card className="shadow-sm bg-background">
-                  <CardHeader className="p-3 sm:p-4 pb-2">
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                       <Info className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       الأسئلة الشائعة
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-3 sm:p-4 pt-2">
-                    <div className="space-y-4">
-                      {serviceData.supportQuestions.map((question, index) => (
-                        <div
-                          key={index}
-                          className="border-b pb-3 last:border-0 last:pb-0"
-                        >
-                          <div className="flex items-center gap-2 mb-2">
-                            {question.icon === "Info" && (
-                              <Info className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                            )}
-                            {question.icon === "Phone" && (
-                              <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                            )}
-                            {question.icon === "Mail" && (
-                              <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                            )}
-                            <span className="text-xs sm:text-sm font-medium">
-                              {question.title}
-                            </span>
-                          </div>
-                          <p className="text-xs sm:text-sm text-muted-foreground pr-6">
-                            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة.
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger className="px-4 text-[#25155c] dark:text-foreground">
+                          كم مدة الخدمة؟
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4">
+                          يتم تقديم الخدمة لمدة سنة إلى 3 سنوات
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger className="px-4 text-[#25155c] dark:text-foreground">
+                          كم تكلفة الخدمة؟
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4">
+                          يتم تقديم الخدمة مجاناً
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-3">
+                        <AccordionTrigger className="px-4 text-[#25155c] dark:text-foreground">
+                          كيف يمكن التواصل مع الخدمة؟
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4">
+                          يمكن التواصل مع الخدمة عن طريق البريد الإلكتروني
+                          help@company.sa
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </CardContent>
                 </Card>
 
@@ -382,7 +390,7 @@ const ServiceInfoPage = () => {
               </TabsContent>
             </Tabs>
             <Card className="shadow-sm bg-background mt-4">
-              <CardHeader className="p-3 sm:p-4 pb-2">
+              <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   خدمات ذات صلة

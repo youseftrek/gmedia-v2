@@ -181,12 +181,20 @@
     @apply mb-3;
   }
 
+  .formio-form .choices__item.choices__item--selectable {
+    @apply !rounded-xl;
+  }
+
+  .formio-form .choices__item.choices__item--selectable:hover {
+    @apply bg-primary text-primary-foreground;
+  }
+
   /* formio form input styles */
   .formio-form input {
-    @apply file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 !border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    @apply file:text-foreground rounded-md placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 !border-input flex h-9 w-full min-w-0 border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
   }
   .formio-form input:focus {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply focus-visible:!border-primary focus-visible:!ring-primary/50 focus-visible:!ring-[3px];
   }
   .formio-form input:invalid {
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
@@ -230,6 +238,11 @@
   }
 
   /* Dark mode specific overrides */
+
+  .btn.btn-default.formio-button-remove-row {
+    @apply !bg-transparent !text-destructive hover:bg-transparent hover:text-destructive/80;
+  }
+
   .dark .choices__list.choices__list--dropdown.is-active {
     @apply !bg-popover border-border;
   }
@@ -244,7 +257,11 @@
   }
 
   .formio-form .formio-choices .form-control {
-    @apply border-input placeholder:text-muted-foreground dark:bg-input/30 !p-0 flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    @apply border-input placeholder:text-muted-foreground dark:bg-input/30  flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  }
+
+  .choices__item.choices__placeholder.choices__item--selectable {
+    @apply !p-0 !pt-0.5;
   }
 
   .formio-form .formio-choices .form-control:focus-within {
@@ -252,11 +269,11 @@
   }
 
   .formio-form .formio-choices .choices__list--dropdown {
-    @apply bg-popover text-popover-foreground mt-1 rounded-md border shadow-md z-50;
+    @apply bg-popover text-popover-foreground mt-1 rounded-md border shadow-md !z-50;
   }
 
   .formio-form .formio-choices .choices__item {
-    @apply px-3 py-2 text-sm;
+    @apply pt-1;
   }
 
   .formio-form .formio-choices .choices__item--choice {
@@ -321,7 +338,7 @@
   }
 
   .formio-component-tabs .nav-tabs {
-    @apply flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground mb-2 border-0 gap-1 flex-wrap;
+    @apply flex items-center justify-start rounded-md bg-muted p-1 text-muted-foreground mb-2 border-0 gap-1 flex-wrap;
   }
 
   .formio-component-tabs .nav-item {
@@ -333,7 +350,7 @@
   }
 
   .formio-component-tabs .nav-link.active {
-    @apply bg-background text-foreground shadow-sm;
+    @apply bg-background text-foreground shadow-sm text-primary;
   }
 
   .formio-component-tabs .tab-content {
@@ -367,7 +384,7 @@
 
   /* Enhanced panel styling */
   .formio-form .panel {
-    @apply bg-card text-card-foreground rounded-lg border shadow-sm mb-6 last:mb-0 overflow-hidden;
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm mb-6 last:mb-0;
   }
 
   .formio-form .panel .panel-heading {
@@ -515,12 +532,8 @@
   }
 
   /* Make sure icons in RTL context are properly aligned */
-  [dir="rtl"] .formio-form .btn i {
-    @apply mr-0 ml-2;
-  }
-
-  [dir="rtl"] .formio-form .input-group-addon i {
-    @apply ml-0;
+  .btn.btn-primary.formio-button-add-row {
+    @apply !flex !items-center !justify-center !gap-2;
   }
 
   /* Input group styles */
@@ -599,5 +612,22 @@
   /* Specific style for remove row button */
   .formio-form .formio-button-remove-row {
     @apply bg-background text-destructive hover:bg-destructive/10 border border-destructive/30;
+  }
+
+  /* CUSTOM FORMS ELEMENTS */
+  #eltum4-videoUrl {
+    @apply rtl:!pr-6;
+  }
+  .control-label--hidden {
+    @apply rtl:!left-3 rtl:!right-auto;
+  }
+  .formio-form input[type="checkbox"] {
+    @apply w-4 h-4 accent-primary cursor-pointer;
+  }
+  .formio-form .radio label {
+    @apply flex items-center gap-2 mx-2;
+  }
+  .formio-form .radio input[type="radio"] {
+    @apply w-4 h-4 accent-primary cursor-pointer;
   }
 }
