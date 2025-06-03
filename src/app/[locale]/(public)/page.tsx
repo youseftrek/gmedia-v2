@@ -13,6 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const session = await auth();
+  console.log("session", session);
   const t = await getTranslations("HomePage");
 
   // Extract all translations needed for the client component

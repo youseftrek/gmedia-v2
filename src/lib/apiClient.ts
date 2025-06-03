@@ -44,6 +44,7 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401 && typeof window !== "undefined") {
       // Automatically logout user
       await signOut();
+      window.location.href = process.env.NEXT_PUBLIC_LOGOUT_REDIRECT_URL || "/";
     }
     return Promise.reject(error);
   }

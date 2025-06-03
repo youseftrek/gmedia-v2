@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import LoginForm from "./_components/forms/LoginForm";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
+import { nafathLogin } from "@/actions/NafathLogin";
 
 const LoginPage = () => {
   const t = useTranslations("LoginPage");
@@ -56,22 +56,42 @@ const LoginPage = () => {
             <div className="">
               <h2 className="text-2xl font-bold">{t("title")}</h2>
               <p className="text-muted-foreground mt-1">{t("subtitle")}</p>
-              <Link
-                href={nafathUrl}
-                target="_blank"
-                className={cn(
-                  buttonVariants({ variant: "secondary" }),
-                  "w-full mt-4 flex items-center justify-center gap-4"
-                )}
+              <form
+                action={async (formData) => {
+                  "use server";
+                  const res = await nafathLogin(formData);
+                  console.log("res", res);
+                }}
               >
-                <Image
-                  src="/images/gmedia/nafath.png"
-                  alt="Nafath"
-                  width={25 / 1.25}
-                  height={25}
+                <input
+                  type="hidden"
+                  name="username"
+                  value="nafathLoginProvider"
                 />
-                {t("nafath")}
-              </Link>
+                <input
+                  type="hidden"
+                  name="password"
+                  value="nafathLoginProvider"
+                />
+                <input
+                  type="hidden"
+                  name="captchaToken"
+                  value="nafathLoginProvider"
+                />
+                <input type="hidden" name="guid" value="nafathLoginProvider" />
+                <Button
+                  variant="secondary"
+                  className="w-full mt-4 flex items-center justify-center gap-4"
+                >
+                  <Image
+                    src="/images/gmedia/nafath.png"
+                    alt="Nafath"
+                    width={25 / 1.25}
+                    height={25}
+                  />
+                  {t("nafath")}
+                </Button>
+              </form>
               <div className="relative mt-8">
                 <div className="absolute inset-0 bg-border h-0.5 top-1/2 -translate-y-1/2" />
                 <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rounded-full bg-secondary py-1 w-[60px] text-center">

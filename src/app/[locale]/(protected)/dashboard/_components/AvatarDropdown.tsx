@@ -18,6 +18,7 @@ import { HelpCircle, LogOut, UserRoundPen } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -28,36 +29,25 @@ type Props = {
 };
 
 const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
-  // const { data: session, status } = useSession();
   const [currSession, setCurrSession] = useState(session);
   const t = useTranslations("AvatarDropdown");
   const locale = useLocale();
+  const router = useRouter();
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setCurrSession(session);
-    }
-  }, [session, status]);
+    setCurrSession(session);
+  }, [session]);
 
   const handleLogout = async () => {
     try {
-      await signOut();
+      await signOut({ redirect: false });
       toast.success("Logged out successfully");
+      // Use window.location to ensure a full page reload after logout
+      window.location.href = process.env.NEXT_PUBLIC_LOGOUT_REDIRECT_URL || "/";
     } catch (error) {
       toast.error("Failed to logout");
     }
   };
-
-  if (status === "loading" && isOpen)
-    return (
-      <div className="flex items-center gap-2">
-        <Skeleton className="rounded-full w-9 h-9" />
-        <div className="space-y-2">
-          <Skeleton className="w-[100px] h-4" />
-          <Skeleton className="w-[120px] h-4" />
-        </div>
-      </div>
-    );
 
   return (
     <div className="flex items-center gap-2">
