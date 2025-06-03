@@ -195,7 +195,6 @@
   .formio-form input:invalid {
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
   }
-
   .form-control.ui.fluid.selection.dropdown {
     @apply flex flex-col;
   }

@@ -45,13 +45,29 @@ export function LanguageSelect({ className, buttonVariant }: Props) {
     // Get the path without the locale prefix to maintain the same path
     const pathWithoutLocale = currentPathname || "";
 
-    // Check if current path is a public route
-    const isPublicRoute =
-      Object.values(PUBLIC_ROUTES).some(
-        (route) => pathWithoutLocale === route
-      ) || pathWithoutLocale.startsWith("service-details/");
+    // Check if current path is a public route using the same logic as middleware
+    const isPublicRoute = Object.values(PUBLIC_ROUTES).some((route) => {
+      // Handle route patterns with parameters like "/service-details/:id"
+      if (route.includes("/:")) {
+        const baseRoute = route.split("/:")[0];
+        return (
+          pathWithoutLocale === baseRoute ||
+          pathWithoutLocale.startsWith(`${baseRoute}/`)
+        );
+      }
+      return pathWithoutLocale === route;
+    });
 
-    if (session && !isPublicRoute) {
+    // Separately check for service-details pages
+    const isServiceDetailsPage =
+      pathWithoutLocale === "service-details" ||
+      pathWithoutLocale.startsWith("service-details/");
+
+    // Combined check for any public page
+    const isPublicPage = isPublicRoute || isServiceDetailsPage;
+
+    // Only make API call if user is logged in AND NOT on a public route
+    if (session && !isPublicPage) {
       const newLangCode = LOCALE_CODE[newLocale as keyof typeof LOCALE_CODE];
 
       await toast.promise(
@@ -71,7 +87,17 @@ export function LanguageSelect({ className, buttonVariant }: Props) {
     }
 
     // Navigate to the same path but with the new locale
-    router.push(`/${newLocale}${pathWithoutLocale}`);
+    // Force refresh the page to ensure middleware processes the new URL
+    try {
+      // Use a more reliable way to construct the URL
+      const newUrl = `/${newLocale}${pathWithoutLocale}`;
+      console.log(`Language change: navigating to ${newUrl}`);
+
+      // Use direct window.location for a full page reload
+      window.location.href = newUrl;
+    } catch (error) {
+      console.error("Error during language change navigation:", error);
+    }
   };
 
   return (
