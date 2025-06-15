@@ -3,13 +3,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CertificatePDF from "./CertificatePDF";
 import { useTranslations } from "next-intl";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import { NoDataMessage } from "./NoDataMessage";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Download, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import BillsService from "@/data/bills-service";
+import { RatingDialog } from "./RatingDialog";
 
 interface DocumentPDFsProps {
   certificateDetails?: {
@@ -167,6 +168,17 @@ export default function DocumentPDFs({
           </CardContent>
         </Card>
       )}
+
+      <Card className="bg-card w-full">
+        <CardHeader>
+          <CardTitle className="font-semibold text-primary text-lg">
+            {t("rating")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <RatingDialog />
+        </CardContent>
+      </Card>
     </div>
   );
 }

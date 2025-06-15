@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import DashboardLayoutClient from "./_components/DashboardLayoutClient";
 
 export default async function DashboardLayout({

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { getSessionSafe } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
 import HomeClient from "./_components/HomeClient";
 import { Metadata } from "next";
@@ -12,8 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const session = await auth();
-  console.log("session", session);
+  const session = await getSessionSafe();
   const t = await getTranslations("HomePage");
 
   // Extract all translations needed for the client component

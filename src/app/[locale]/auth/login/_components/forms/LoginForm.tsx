@@ -22,14 +22,15 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import z from "zod";
 import { UserLoginSchema } from "@/validations/user-login";
-import { login } from "@/actions/login";
 import { getCaptcha } from "@/data/get-captcha";
 import { PROTECTED_ROUTES } from "@/constants";
 import { AtSign, Lock, RefreshCw } from "lucide-react";
+import axios from "axios";
+import { useAuth } from "@/providers/AuthProvider";
 
 const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const router = useRouter();
-  const locale = useLocale();
+  const { setSession, setIsAuthenticated } = useAuth();
   const t = useTranslations("LoginPage.form");
   const [isCaptchaLoading, setIsCaptchaLoading] = useState(true);
   const [captchaData, setCaptchaData] = useState({
@@ -54,7 +55,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
 
       if (res.success && res.data?.data) {
         const { captchaImage, guidId } = res.data.data;
-
+        console.log("guid", guidId);
         setCaptchaData({ image: captchaImage, guid: guidId });
         form.setValue("guid", guidId);
       } else {
@@ -74,34 +75,15 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
 
   const onSubmit = async (values: z.infer<typeof UserLoginSchema>) => {
     try {
-      const res = await login(values, locale);
-
-      if (res.success) {
-        // Get the session to access the token
-        const session = await fetch("/api/auth/session").then((res) =>
-          res.json()
-        );
-
-        if (session?.token) {
-          // Save token to sessionStorage
-          sessionStorage.setItem("token", session.token);
-        }
-
+      const res = await axios.post("/api/auth/login", values);
+      if (res.data.success) {
         toast.success(t("success-login"));
-
-        // Redirect to callback URL if provided, otherwise go to dashboard
-        if (callbackUrl) {
-          // Use window.location for external URLs or cross-origin redirects
-          window.location.href = callbackUrl;
-        } else {
-          // Use router for internal navigation
-          router.push(PROTECTED_ROUTES.DASHBOARD);
-        }
-      } else if (res.error) {
-        toast.error(res.error);
+        router.push(PROTECTED_ROUTES.DASHBOARD);
+        setSession(res.data.session);
+        setIsAuthenticated(true);
+      } else {
+        toast.error(res.data.error);
         form.setValue("captchaToken", "");
-        // Refresh captcha on login failure
-        fetchCaptcha();
       }
     } catch (error) {
       console.error(error);
@@ -188,18 +170,18 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
                 </Button>
               </div>
 
-              <div className="bg-white mb-2 border rounded-md overflow-hidden h-auto">
+              <div className="bg-white mb-2 border rounded-md overflow-hidden h-[70px]">
                 {isCaptchaLoading ? (
                   <div className="flex items-center justify-center h-full w-full">
-                    <Skeleton className="h-full min-h-[90px] w-full" />
+                    <Skeleton className="h-full w-full" />
                   </div>
                 ) : captchaData.image ? (
                   <Image
                     src={`data:image/png;base64,${captchaData.image}`}
                     alt="captcha"
                     width={900}
-                    height={500}
-                    className="w-full object-cover"
+                    height={100}
+                    className="w-full object-contain"
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full w-full text-muted-foreground text-sm">

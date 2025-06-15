@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { getFormData } from "@/data/get-form-data";
 import { convertFormDataToJSON } from "@/lib/utils";
 import ClientForm from "./_components/ClientForm";

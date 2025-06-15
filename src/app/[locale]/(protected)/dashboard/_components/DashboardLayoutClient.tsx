@@ -5,8 +5,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
 import { useLocale } from "next-intl";
-import { Session } from "next-auth";
 import Footer from "@/components/Footer";
+import { Session } from "@/lib/auth";
 
 interface DashboardLayoutClientProps {
   children: React.ReactNode;

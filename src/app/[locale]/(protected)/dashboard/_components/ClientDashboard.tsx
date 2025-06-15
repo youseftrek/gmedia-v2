@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ColumnDef } from "@tanstack/react-table";
 import {
@@ -29,6 +28,7 @@ import Notification from "./wedgits/Notification";
 import OrdersCard from "./wedgits/OrdersCard";
 import { useLocale, useTranslations } from "next-intl";
 import { TableSkeleton } from "./TableSkeleton";
+import { useAuth } from "@/providers/AuthProvider";
 
 // Define type for draft items
 interface DraftItem {
@@ -52,7 +52,7 @@ export default function ClientDashboard({
   calendar: any;
 }) {
   const t = useTranslations("DashboardPage");
-  const { data: session, status } = useSession();
+  const { session, isAuthenticated: status } = useAuth();
   const [drafts, setDrafts] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -103,7 +103,7 @@ export default function ClientDashboard({
   // Fetch drafts data
   useEffect(() => {
     async function fetchDrafts() {
-      if (status !== "authenticated" || !session) return;
+      if (!status || !session) return;
 
       try {
         setLoading(true);
@@ -364,7 +364,7 @@ export default function ClientDashboard({
           {t("RequestsNeedsActions.title")}
         </h2>
 
-        {status === "unauthenticated" ? (
+        {!status ? (
           <Alert variant="destructive" className="max-w-md">
             <AlertCircle className="w-4 h-4" />
             <AlertTitle>Authentication Required</AlertTitle>

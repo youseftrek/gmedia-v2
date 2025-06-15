@@ -100,7 +100,6 @@ export default function ParallaxBackground({
           quantity={100}
           ease={100}
           color="#7a3996"
-          size={1}
           refresh
         />
         <Particles
@@ -108,6 +107,7 @@ export default function ParallaxBackground({
           quantity={80}
           ease={80}
           color="#00bbbe"
+          size={1}
           refresh
         />
       </div>

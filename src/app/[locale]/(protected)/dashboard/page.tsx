@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import DashboardContent from "./_components/DashboardContent";
 import { redirect } from "next/navigation";
 import { ErrorUI } from "@/components/ui/error-ui";

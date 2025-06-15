@@ -13,11 +13,11 @@ import { Languages, Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { changeLang } from "@/data/change-lang";
 import { LOCALE_CODE } from "@/constants/locale";
 import { toast } from "sonner";
 import { PUBLIC_ROUTES } from "@/constants";
+import { useAuth } from "@/providers/AuthProvider";
 
 type Props = {
   className?: string;
@@ -36,7 +36,7 @@ export function LanguageSelect({ className, buttonVariant }: Props) {
   const t = useTranslations("languagesToggle");
   const currentPathname = usePathname();
   const router = useRouter();
-  const { data: session } = useSession();
+  const { session } = useAuth();
   const currentLocale = useLocale();
 
   const handleLanguageChange = async (newLocale: string) => {

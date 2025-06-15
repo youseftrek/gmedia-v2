@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Formio } from "formiojs";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import apiClient from "@/lib/apiClient";
 import {
@@ -16,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { BackButton } from "@/components/shared/BackButton";
+import { useAuth } from "@/providers/AuthProvider";
 
 export default function ClientDraftForm({
   formDataObj,
@@ -37,7 +37,7 @@ export default function ClientDraftForm({
   const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const locale = useLocale();
-  const session = useSession();
+  const { session } = useAuth();
   const router = useRouter();
   const [formBuilder, setFormBuilder] = useState<any>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -94,7 +94,7 @@ export default function ClientDraftForm({
     const initializeForm = async () => {
       try {
         // Set up Formio fetch with authentication
-        if (session?.data?.token) {
+        if (session?.token) {
           Formio.fetch = (url: string, options: RequestInit = {}) => {
             // Ensure headers object exists
             if (!options.headers) {
@@ -108,7 +108,7 @@ export default function ClientDraftForm({
             delete headers["authorization"];
 
             // Add the Bearer token
-            headers["Authorization"] = `Bearer ${session?.data?.token}`;
+            headers["Authorization"] = `Bearer ${session?.token}`;
 
             // Return the fetch call
             return fetch(url, options);
@@ -137,7 +137,7 @@ export default function ClientDraftForm({
     };
 
     initializeForm();
-  }, [formDataObj, locale, session?.data?.token]);
+  }, [formDataObj, locale, session?.token]);
 
   const updateDraft = async () => {
     setLoading(true);

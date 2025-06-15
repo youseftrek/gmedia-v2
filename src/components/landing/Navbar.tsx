@@ -5,7 +5,7 @@ import { LanguageSelect } from "../shared/LanguageSelect";
 import HomePageMobileMenu from "./MobileMenu";
 import NavItems from "./NavItems";
 import AvatarMenu from "../shared/AvatarMenu";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 type Props = {
   session?: Session | null;

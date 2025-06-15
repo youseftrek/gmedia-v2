@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import Image from "next/image";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AvatarDropdown from "./AvatarDropdown";

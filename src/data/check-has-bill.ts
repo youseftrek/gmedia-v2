@@ -1,4 +1,4 @@
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import axios from "axios";
 import apiClient from "@/lib/apiClient";
 

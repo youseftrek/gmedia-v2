@@ -4,7 +4,7 @@ import UserNotifications from "./UserNotifications";
 import StatisticsSection from "./StatisticsSection";
 import CalendarSection from "./CalendarSection";
 import RequestsTable from "./RequestsTable";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import AnimateInView from "@/components/ui/animate-in-view";
 import { PageTransition, SlideIn } from "@/components/ui/layout-animations";
 import ClientNeedActions from "../need-actions/_components/ClientNeedActions";

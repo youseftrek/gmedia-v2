@@ -4,11 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
-import { useSession } from "next-auth/react";
 import { AlertCircle, CreditCard, Loader2 } from "lucide-react";
 import BillsService from "@/data/bills-service";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 interface PaymentCardProps {
   documentId: number;
@@ -24,7 +23,7 @@ interface PaymentCardProps {
 export default function PaymentCard({
   documentId,
   billDetails,
-  session
+  session,
 }: PaymentCardProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

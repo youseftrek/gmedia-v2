@@ -442,6 +442,26 @@
     "reference_number": "الرقم المرجعي",
     "certificate_status": "حالة الشهادة",
     "certificate_document": "الشهادة",
+    "rating": "الإستبيان",
+    "ratingDes": "يسعدنا تقييم مدى رضاك عن الخدمة",
+    "ratingDialog": {
+      "title": "قيّم تجربتك",
+      "description": "يرجى أخذ لحظة لتقييم تجربتك مع هذه الخدمة",
+      "submitRating": "إرسال التقييم",
+      "cancel": "إلغاء",
+      "thankYou": "شكرًا على ملاحظاتك!",
+      "thankYouDescription": "ملاحظاتك تساعدنا في تحسين خدماتنا",
+      "rateAgain": "تقييم مرة أخرى",
+      "close": "إغلاق",
+      "stars": {
+        "1": "سيء جدًا",
+        "2": "سيء",
+        "3": "متوسط",
+        "4": "جيد",
+        "5": "ممتاز"
+      },
+      "commentPlaceholder": "أخبرنا عن تجربتك (اختياري)"
+    },
     "certificate": "الشهادة",
     "noData": "لا توجد بيانات متاحة",
     "noDataYet": "لا توجد بيانات متاحة بعد",

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import ClientClosed from "./_components/ClientClosed";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { getSessionSafe } from "@/lib/auth";
 import axios from "axios";
 import SignUpClient from "./_components/sign-up-client";
 import { LOCALE_CODE } from "@/constants/locale";
@@ -30,7 +30,7 @@ type Props = {
 
 export default async function SignUpPage({ params }: Props) {
   const { locale } = await params;
-  const session = await auth();
+  const session = await getSessionSafe();
   const formData = await getRegistrationForm(locale);
 
   // If user is already logged in, they shouldn't access the sign-up page

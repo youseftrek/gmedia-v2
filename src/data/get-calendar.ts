@@ -1,11 +1,10 @@
-import apiClient from "@/lib/apiClient";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 export const getCalendar = async (session: Session) => {
   try {
-    const response = await apiClient.get(
+    const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/certificate/due-dates`,
       {
         headers: {

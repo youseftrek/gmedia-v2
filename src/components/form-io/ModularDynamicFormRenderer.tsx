@@ -25,7 +25,7 @@ import {
   DynamicPhoneNumber,
   PhoneNumberAssets,
 } from "./components";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import Script from "next/script";
 import { toast } from "sonner";
 import { FormProvider as CustomFormProvider } from "./context/FormContext";

@@ -8,8 +8,8 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { SessionProvider } from "next-auth/react";
 import { getMessages } from "next-intl/server";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 const FONT_EN = Outfit({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -17,11 +17,11 @@ const FONT_EN = Outfit({
   preload: true,
 });
 
-const FONT_AR = IBM_Plex_Sans_Arabic({
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  preload: true,
-});
+// const FONT_AR = IBM_Plex_Sans_Arabic({
+//   weight: ["100", "200", "300", "400", "500", "600", "700"],
+//   subsets: ["latin"],
+//   preload: true,
+// });
 
 export default async function RootLayout({
   children,
@@ -54,7 +54,7 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         className={`${
-          locale === "ar" ? FONT_AR.className : FONT_EN.className
+          locale === "ar" ? FONT_EN.className : FONT_EN.className
         } antialiased w-full h-full overflow-y-auto`}
       >
         <NextTopLoader
@@ -72,7 +72,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <SessionProvider>{children}</SessionProvider>
+            <AuthProvider>{children}</AuthProvider>
             <Toaster
               invert={true}
               richColors

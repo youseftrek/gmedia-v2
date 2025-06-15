@@ -23,7 +23,7 @@ import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { TableSkeleton } from "./TableSkeleton";
 import { fetchRequestsNeedActions } from "@/actions/dashboard-actions";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 // Define type for draft items
 interface DraftItem {

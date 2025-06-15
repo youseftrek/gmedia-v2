@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { AnimatedMultiStepper } from "@/components/MultiStep";
 import {
   Accordion,
@@ -30,7 +30,7 @@ const StatusBanner = ({ statusId, t }: { statusId?: number; t: any }) => {
   switch (status) {
     case 41: // Payment step
       return (
-        <div className="w-full border border-amber-500/30 bg-amber-500/5 text-amber-700 p-4 rounded-md text-right">
+        <div className="w-full border border-amber-500/30 bg-amber-500/5 text-amber-700 p-4 rounded-md rtl:text-right ltr:text-left">
           {t("statusCards.title")}
           {t("statusCards.pendingPayment")}
         </div>
@@ -38,28 +38,28 @@ const StatusBanner = ({ statusId, t }: { statusId?: number; t: any }) => {
     case 21:
     case 20: // Under review
       return (
-        <div className="w-full border border-blue-500/30 bg-blue-500/5 text-blue-700 p-4 rounded-md text-right">
+        <div className="w-full border border-blue-500/30 bg-blue-500/5 text-blue-700 p-4 rounded-md rtl:text-right ltr:text-left">
           {t("statusCards.title")}
           {t("statusCards.underReview")}
         </div>
       );
     case 15: // Rejected
       return (
-        <div className="w-full border border-red-500/30 bg-red-500/5 text-red-700 p-4 rounded-md text-right">
+        <div className="w-full border border-red-500/30 bg-red-500/5 text-red-700 p-4 rounded-md rtl:text-right ltr:text-left">
           {t("statusCards.title")}
           {t("statusCards.rejected")}
         </div>
       );
     case 42: // Success/Approved
       return (
-        <div className="w-full border border-green-500/30 bg-green-500/5 text-green-700 p-4 rounded-md text-right">
+        <div className="w-full border border-green-500/30 bg-green-500/5 text-green-700 p-4 rounded-md rtl:text-right ltr:text-left">
           {t("statusCards.title")}
           {t("statusCards.approved")}
         </div>
       );
     default:
       return (
-        <div className="w-full border border-blue-500/30 bg-blue-500/5 text-blue-700 p-4 rounded-md text-right">
+        <div className="w-full border border-blue-500/30 bg-blue-500/5 text-blue-700 p-4 rounded-md rtl:text-right ltr:text-left">
           {t("statusCards.title")}
           {t("statusCards.underReview")}
         </div>

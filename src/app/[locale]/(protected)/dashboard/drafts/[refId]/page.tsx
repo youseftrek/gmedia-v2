@@ -1,5 +1,5 @@
 // app/drafts/[refId]/page.tsx
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { getFormDisplayByRefNum } from "@/data/get-form-display-by-ref-num";
 import { convertFormDataToJSON } from "@/lib/utils";
 import { AnimatedMultiStepper } from "@/components/MultiStep";

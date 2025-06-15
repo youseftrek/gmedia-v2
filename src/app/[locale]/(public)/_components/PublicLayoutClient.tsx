@@ -5,7 +5,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocale } from "next-intl";
 import { Sidebar } from "../../(protected)/dashboard/_components/Sidebar";
 import { Navbar } from "../../(protected)/dashboard/_components/Navbar";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import Footer from "@/components/Footer";
 
 interface PublicLayoutClientProps {

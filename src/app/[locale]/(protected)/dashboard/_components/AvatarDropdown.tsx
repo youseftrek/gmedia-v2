@@ -13,12 +13,11 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { PROTECTED_ROUTES } from "@/constants";
 import { Link } from "@/i18n/routing";
+import { Session } from "@/lib/auth";
 import { getInitials } from "@/lib/utils";
+import { useAuth } from "@/providers/AuthProvider";
 import { HelpCircle, LogOut, UserRoundPen } from "lucide-react";
-import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -32,22 +31,36 @@ const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
   const [currSession, setCurrSession] = useState(session);
   const t = useTranslations("AvatarDropdown");
   const locale = useLocale();
-  const router = useRouter();
+  const { logout, setIsAuthenticated, setSession } = useAuth();
 
   useEffect(() => {
-    setCurrSession(session);
-  }, [session]);
+    if (status === "authenticated") {
+      setCurrSession(session);
+    }
+  }, [session, status]);
 
   const handleLogout = async () => {
     try {
-      await signOut({ redirect: false });
+      await logout();
+      setIsAuthenticated(false);
+      setSession(null);
       toast.success("Logged out successfully");
-      // Use window.location to ensure a full page reload after logout
-      window.location.href = process.env.NEXT_PUBLIC_LOGOUT_REDIRECT_URL || "/";
     } catch (error) {
+      console.log(error);
       toast.error("Failed to logout");
     }
   };
+
+  if (status === "loading" && isOpen)
+    return (
+      <div className="flex items-center gap-2">
+        <Skeleton className="rounded-full w-9 h-9" />
+        <div className="space-y-2">
+          <Skeleton className="w-[100px] h-4" />
+          <Skeleton className="w-[120px] h-4" />
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex items-center gap-2">
@@ -111,7 +124,7 @@ const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
               onClick={handleLogout}
               className="flex items-center rtl:flex-row-reverse gap-2 w-full"
             >
-              <LogOut size={18} className="text-red-500" />
+              <LogOut size={18} />
               <span>{t("links.logout")}</span>
             </button>
           </DropdownMenuItem>
@@ -119,7 +132,11 @@ const AvatarDropdown = ({ isOpen, isMobile, session }: Props) => {
       </DropdownMenu>
       {isOpen && isMobile && (
         <div className="flex flex-col transition-all duration-300 ease-in-out">
-          <span className="font-medium text-sm">{currSession?.user.name}</span>
+          <span className="font-medium text-sm">
+            {locale === "ar"
+              ? currSession?.user.fullnameAr
+              : currSession?.user.fullnameEn}
+          </span>
           <span className="text-muted-foreground text-xs">
             {currSession?.user.email}
           </span>

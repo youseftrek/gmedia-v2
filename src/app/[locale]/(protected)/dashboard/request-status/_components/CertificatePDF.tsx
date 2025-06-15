@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import CertificatesService from "@/data/certificates-service";
 import BillsService from "@/data/bills-service";
-import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Download, FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useAuth } from "@/providers/AuthProvider";
 
 type CertificatePDFProps = {
   pdfData: {
@@ -21,7 +21,7 @@ type CertificatePDFProps = {
 const CertificatePDF = ({ pdfData }: CertificatePDFProps) => {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const { data: session } = useSession();
+  const { session } = useAuth();
   const [dialogOpen, setDialogOpen] = useState(false);
   const t = useTranslations("RequestStatusPage");
 

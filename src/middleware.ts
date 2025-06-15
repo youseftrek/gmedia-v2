@@ -2,14 +2,12 @@
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
-import { auth } from "./auth";
 import { PROTECTED_ROUTES, PUBLIC_ROUTES } from "./constants";
 import { LOCALE_CODE, LOCALES } from "./constants/locale";
 import { getCurrentUserLang } from "./data/get-current-user-lang";
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  console.log(`Middleware processing: ${pathname}`);
 
   // 1. Figure out the "first segment" locale in the URL, if any
   //    e.g. "/en/dashboard" ⇒ "en", "/" ⇒ undefined
@@ -42,12 +40,9 @@ export default async function middleware(req: NextRequest) {
   // Consider empty path (just the locale like /en or /ar) as public
   const isRootPath = pathWithoutLocale === "" || pathWithoutLocale === "/";
 
-  const isProtectedRoute =
-    !isPublicRoute && !isServiceDetailsPage && !isRootPath;
-
-  console.log(`Path: ${pathname}, WithoutLocale: ${pathWithoutLocale}`);
-  console.log(
-    `isPublicRoute: ${isPublicRoute}, isServiceDetailsPage: ${isServiceDetailsPage}, isRootPath: ${isRootPath}, isProtectedRoute: ${isProtectedRoute}`
+  // Set all non-protected routes as accessible without authentication
+  const isProtectedRoute = Object.values(PROTECTED_ROUTES).some((route) =>
+    pathWithoutLocale.startsWith(route)
   );
 
   // 4. Redirect root path (/) to default locale
@@ -58,9 +53,8 @@ export default async function middleware(req: NextRequest) {
   // 5. Redirect any non-localized path to a localized path
   if (!isValidLocale && pathname !== "/") {
     // For non-localized paths, we'll still check auth to determine default locale
-    const authResponse = await auth();
-    const isAuthenticated =
-      !!authResponse && new Date() <= new Date(authResponse.expires);
+    const token = req.cookies.get("auth-token")?.value;
+    const isAuthenticated = !!token;
 
     // Default to Arabic, but use user locale for authenticated users
     let redirectLocale = "ar";
@@ -68,7 +62,7 @@ export default async function middleware(req: NextRequest) {
     // Only attempt to get user's language if authenticated AND on a protected route
     if (isAuthenticated && isProtectedRoute) {
       try {
-        const { success, data } = await getCurrentUserLang(authResponse);
+        const { success, data } = await getCurrentUserLang(token);
         if (success && data?.data) {
           redirectLocale =
             Object.entries(LOCALE_CODE).find(
@@ -88,14 +82,13 @@ export default async function middleware(req: NextRequest) {
   // 6. For protected routes: if user is authenticated and their locale in URL doesn't match preference
   //    redirect them to their preferred locale
   if (isValidLocale && isProtectedRoute) {
-    const authResponse = await auth();
-    const isAuthenticated =
-      !!authResponse && new Date() <= new Date(authResponse.expires);
+    const token = req.cookies.get("auth-token")?.value;
+    const isAuthenticated = !!token;
 
     if (isAuthenticated) {
       let userLocale = "ar";
       try {
-        const { success, data } = await getCurrentUserLang(authResponse);
+        const { success, data } = await getCurrentUserLang(token);
         if (success && data?.data) {
           userLocale =
             Object.entries(LOCALE_CODE).find(
@@ -108,9 +101,6 @@ export default async function middleware(req: NextRequest) {
 
       // Only redirect if user's locale doesn't match URL locale
       if (pathLocale !== userLocale) {
-        console.log(
-          `Redirecting from ${pathLocale} to user preferred locale ${userLocale}`
-        );
         return NextResponse.redirect(
           new URL(`/${userLocale}${pathWithoutLocale}`, req.nextUrl.origin)
         );
@@ -119,10 +109,9 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 7. Standard protection: if they hit a protected path but aren't authed, send them to login
-  if (pathname.includes(PROTECTED_ROUTES.DASHBOARD)) {
-    const authResponse = await auth();
-    const isAuthenticated =
-      !!authResponse && new Date() <= new Date(authResponse.expires);
+  if (isProtectedRoute) {
+    const token = req.cookies.get("auth-token")?.value;
+    const isAuthenticated = !!token;
 
     if (!isAuthenticated) {
       return NextResponse.redirect(
@@ -136,14 +125,13 @@ export default async function middleware(req: NextRequest) {
 
   // 8. If they go to the "/auth" pages but ARE authenticated, send them to their locale dashboard
   if (pathname.includes("/auth")) {
-    const authResponse = await auth();
-    const isAuthenticated =
-      !!authResponse && new Date() <= new Date(authResponse.expires);
+    const token = req.cookies.get("auth-token")?.value;
+    const isAuthenticated = !!token;
 
     if (isAuthenticated) {
       let userLocale = "ar";
       try {
-        const { success, data } = await getCurrentUserLang(authResponse);
+        const { success, data } = await getCurrentUserLang(token);
         if (success && data?.data) {
           userLocale =
             Object.entries(LOCALE_CODE).find(
@@ -164,7 +152,6 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 9. Finally, hand off to next‑intl for locale file loading
-  console.log(`No redirects applied, passing request through for ${pathname}`);
   return createMiddleware(routing)(req);
 }
 

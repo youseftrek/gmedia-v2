@@ -424,6 +424,26 @@
     "reference_number": "Reference Number",
     "certificate_status": "Certificate Status",
     "certificate_document": "Certificate",
+    "rating": "Rating",
+    "ratingDes": "Please take a moment to rate your experience with this service.",
+    "ratingDialog": {
+      "title": "Rate Your Experience",
+      "description": "Please take a moment to rate your experience with this service",
+      "submitRating": "Submit Rating",
+      "cancel": "Cancel",
+      "thankYou": "Thank you for your feedback!",
+      "thankYouDescription": "Your feedback helps us improve our services",
+      "rateAgain": "Rate Again",
+      "close": "Close",
+      "stars": {
+        "1": "Very Poor",
+        "2": "Poor",
+        "3": "Average",
+        "4": "Good",
+        "5": "Excellent"
+      },
+      "commentPlaceholder": "Tell us about your experience (optional)"
+    },
     "certificate": "Certificate",
     "noDataYet": "No Data Available Yet",
     "noCertificate": "No Certificate Available",

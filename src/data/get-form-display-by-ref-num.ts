@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 export async function getFormDisplayByRefNum(session: Session, refId: string) {
   try {

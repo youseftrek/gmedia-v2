@@ -1,6 +1,6 @@
 "use client";
 
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";

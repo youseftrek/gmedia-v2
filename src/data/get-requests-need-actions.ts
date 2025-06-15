@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getRequestsNeedActions(
   session: Session,
@@ -9,12 +9,14 @@ export async function getRequestsNeedActions(
   locale: string
 ) {
   try {
-    const response = await apiClient.get(
-      `/request/inbox?startIndex=${currentPage}&pageSize=${pageSize}`,
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_API_BASE_URL +
+        `/request/inbox?startIndex=${currentPage}&pageSize=${pageSize}`,
       {
         headers: {
           "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
           "Content-Type": "application/json",
+          Authorization: `Bearer ${session.token}`,
         },
       }
     );

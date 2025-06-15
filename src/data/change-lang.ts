@@ -1,5 +1,5 @@
 import apiClient from "@/lib/apiClient";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 export async function changeLang(session: Session, language: number) {
   try {

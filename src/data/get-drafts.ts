@@ -1,7 +1,7 @@
 import { LOCALE_CODE } from "@/constants/locale";
 import apiClient from "@/lib/apiClient";
 import axios from "axios";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 export async function getDrafts(
   session: Session,

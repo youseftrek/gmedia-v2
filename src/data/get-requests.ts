@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
 import apiClient from "@/lib/apiClient";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 export async function getRequests(
   session: Session,

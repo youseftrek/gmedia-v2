@@ -1,16 +1,12 @@
 import { useTranslations } from "next-intl";
 import LoginForm from "./_components/forms/LoginForm";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { nafathLogin } from "@/actions/NafathLogin";
 
 const LoginPage = () => {
   const t = useTranslations("LoginPage");
-  // Nafath URL from environment variable
-  const nafathUrl =
-    process.env.NEXT_PUBLIC_NAFATH_URL ||
-    "https://iam.media.gov.sa/oauth/authorize?client_id=139&redirect_uri=http://localhost:3000&response_type=code&scope=";
 
   return (
     <div className="flex justify-center items-center w-full p-4">
@@ -20,7 +16,7 @@ const LoginPage = () => {
       >
         {/* Image Section - Hidden on small screens */}
         <div className="hidden lg:block lg:w-1/2 relative">
-          <div className="absolute inset-0 bg-linear-to-b dark:from-black/60 from-black/30 to-primary/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b dark:from-black/60 from-black/30 to-primary/40 z-10"></div>
           <Image
             src="/images/gmedia/auth.png"
             alt="Authentication"
@@ -49,49 +45,29 @@ const LoginPage = () => {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-linear-to-b from-primary/20 to-primary/40"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-primary/40"></div>
           </div>
 
           <div className="p-6 lg:p-10 flex flex-col gap-6">
             <div className="">
               <h2 className="text-2xl font-bold">{t("title")}</h2>
               <p className="text-muted-foreground mt-1">{t("subtitle")}</p>
-              <form
-                action={async (formData) => {
-                  "use server";
-                  const res = await nafathLogin(formData);
-                  console.log("res", res);
-                }}
+              <Link
+                href={process.env.NEXT_PUBLIC_NAFATH_URL || "#"}
+                target="_blank"
+                className={cn(
+                  buttonVariants({ variant: "secondary" }),
+                  "w-full mt-4 flex items-center justify-center gap-4"
+                )}
               >
-                <input
-                  type="hidden"
-                  name="username"
-                  value="nafathLoginProvider"
+                <Image
+                  src="/images/gmedia/nafath.png"
+                  alt="Nafath"
+                  width={25 / 1.25}
+                  height={25}
                 />
-                <input
-                  type="hidden"
-                  name="password"
-                  value="nafathLoginProvider"
-                />
-                <input
-                  type="hidden"
-                  name="captchaToken"
-                  value="nafathLoginProvider"
-                />
-                <input type="hidden" name="guid" value="nafathLoginProvider" />
-                <Button
-                  variant="secondary"
-                  className="w-full mt-4 flex items-center justify-center gap-4"
-                >
-                  <Image
-                    src="/images/gmedia/nafath.png"
-                    alt="Nafath"
-                    width={25 / 1.25}
-                    height={25}
-                  />
-                  {t("nafath")}
-                </Button>
-              </form>
+                {t("nafath")}
+              </Link>
               <div className="relative mt-8">
                 <div className="absolute inset-0 bg-border h-0.5 top-1/2 -translate-y-1/2" />
                 <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rounded-full bg-secondary py-1 w-[60px] text-center">

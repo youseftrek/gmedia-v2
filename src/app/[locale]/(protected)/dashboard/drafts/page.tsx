@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import ClientDrafts from "./_components/ClientDrafts";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";

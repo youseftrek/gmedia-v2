@@ -7,7 +7,7 @@ import ServicesCardsWithFilters from "./ServicesCardaWithFilters";
 import { ScaleIn, FadeIn, SlideIn } from "@/components/ui/layout-animations";
 import AnimateInView from "@/components/ui/animate-in-view";
 import dynamic from "next/dynamic";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 import { useLocale } from "next-intl";
 
 // Dynamically import the client components with no SSR

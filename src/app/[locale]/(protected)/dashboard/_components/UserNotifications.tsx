@@ -2,7 +2,7 @@
 
 import UserCard from "./wedgits/UserCard";
 import Notification from "./wedgits/Notification";
-import { Session } from "next-auth";
+import { Session } from "@/lib/auth";
 
 export default function UserNotifications({ session }: { session: Session }) {
   // console.log("NEW SESSION FROM CARD:: ", session);
