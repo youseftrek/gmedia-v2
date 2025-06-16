@@ -17,11 +17,11 @@ const FONT_EN = Outfit({
   preload: true,
 });
 
-// const FONT_AR = IBM_Plex_Sans_Arabic({
-//   weight: ["100", "200", "300", "400", "500", "600", "700"],
-//   subsets: ["latin"],
-//   preload: true,
-// });
+const FONT_AR = IBM_Plex_Sans_Arabic({
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  preload: true,
+});
 
 export default async function RootLayout({
   children,
@@ -54,7 +54,7 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         className={`${
-          locale === "ar" ? FONT_EN.className : FONT_EN.className
+          locale === "ar" ? FONT_AR.className : FONT_EN.className
         } antialiased w-full h-full overflow-y-auto`}
       >
         <NextTopLoader
