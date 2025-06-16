@@ -27,6 +27,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { BackButton } from "@/components/shared/BackButton";
+import { getServiceDetails } from "@/data/get-service-details";
 
 // Define types for the service data
 interface RelatedService {
@@ -189,31 +190,17 @@ const serviceData: Service = {
   version: "1.2",
 };
 
-// Helper function to get icon component
-const getIconComponent = (iconName: string) => {
-  const icons = {
-    Info,
-    Phone,
-    Mail,
-    Globe,
-    Shield,
-    FileText,
-    Download,
-    Users,
-    DollarSign,
-    Calendar,
-    Target,
-    Sparkles,
-    CheckCircle,
-    ChevronLeft,
-    ArrowRight,
-    ExternalLink,
-  };
+const ServiceInfoPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string; locale: string }>;
+}) => {
+  const { id, locale } = await params;
 
-  return icons[iconName as keyof typeof icons] || Info;
-};
+  const res = await getServiceDetails(Number(id), locale);
 
-const ServiceInfoPage = () => {
+  console.log("dsdsd: ", JSON.parse(res.data.data));
+
   return (
     <div className="min-h-screen bg-muted/30" dir="rtl">
       <div className="max-w-7xl mx-auto p-3 sm:p-6">
