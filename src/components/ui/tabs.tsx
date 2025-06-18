@@ -54,11 +54,15 @@ function TabsTrigger({
 
 function TabsContent({
   className,
+  dir,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+}: React.ComponentProps<typeof TabsPrimitive.Content> & {
+  dir?: "rtl" | "ltr";
+}) {
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
+      dir={dir}
       className={cn("flex-1 outline-none [&[dir=rtl]]:text-right", className)}
       {...props}
     />

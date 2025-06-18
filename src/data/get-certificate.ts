@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getCertificate(
   id: number,
@@ -8,7 +8,7 @@ export async function getCertificate(
   locale: string
 ) {
   try {
-    const res = await apiClient.get(
+    const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/certificate/${id}/download`,
       {
         headers: {

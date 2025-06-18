@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Formio } from "formiojs";
 import { useRouter } from "next/navigation";
-import apiClient from "@/lib/apiClient";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +14,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { BackButton } from "@/components/shared/BackButton";
 import { useAuth } from "@/providers/AuthProvider";
+import axios from "axios";
+
+// Add a dynamic import for Formio
+let Formio: any;
+// This will only run on the client side
+if (typeof window !== "undefined") {
+  import("formiojs").then((module) => {
+    Formio = module.Formio;
+  });
+}
 
 export default function ClientForm({
   formDataObj,
@@ -93,6 +101,15 @@ export default function ClientForm({
     // Dynamically import formBuilder only on the client side
     const initializeForm = async () => {
       try {
+        // Ensure we're on the client side and Formio is available
+        if (typeof window === "undefined") return;
+
+        // Dynamically import Formio if not already loaded
+        if (!Formio) {
+          const formioModule = await import("formiojs");
+          Formio = formioModule.Formio;
+        }
+
         // Set up Formio fetch with authentication
         if (session?.token) {
           Formio.fetch = (url: string, options: RequestInit = {}) => {
@@ -193,7 +210,13 @@ export default function ClientForm({
       }
 
       // Call API to save form
-      const response = await apiClient.post("/request/save", model);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/save`,
+        model,
+        {
+          headers: { Authorization: `Bearer ${session?.token}` },
+        }
+      );
 
       if (response.data) {
         setIsSubmit(false);
@@ -268,7 +291,13 @@ export default function ClientForm({
       }
 
       // Call API to submit form
-      const response = await apiClient.post("/request/save-send", model);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/save-send`,
+        model,
+        {
+          headers: { Authorization: `Bearer ${session?.token}` },
+        }
+      );
 
       if (response.data && response.data.success) {
         setReferenceNumber(response.data.data);
@@ -414,7 +443,7 @@ export default function ClientForm({
 
       <div id="form-container" className="formio-container"></div>
 
-      <div className="flex items-center gap-2 justify-end mb-8">
+      <div className="flex items-center gap-2 justify-end mb-8 mt-2">
         <Button variant="outline" disabled={loading} onClick={saveRequest}>
           {commonT("save")}
         </Button>

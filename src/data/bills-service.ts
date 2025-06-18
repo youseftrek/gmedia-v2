@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export const BillsService = {
   /**
@@ -8,7 +8,7 @@ export const BillsService = {
    */
   async generate(documentId: number, session: Session, locale: string = "en") {
     try {
-      const response = await apiClient.get(
+      const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/generate/${documentId}`,
         {
           headers: {
@@ -38,11 +38,12 @@ export const BillsService = {
     locale: string = "en"
   ) {
     try {
-      const response = await apiClient.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/initiate-alrajihi-payment/${documentId}`,
         {
           headers: {
             "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
+            Authorization: `Bearer ${session?.token}`,
           },
         }
       );
@@ -59,12 +60,16 @@ export const BillsService = {
    */
   async download(id: number, session: Session, locale: string = "en") {
     try {
-      const response = await apiClient.get(`/bills/${id}/download`, {
-        headers: {
-          "Accept-Language": locale,
-        },
-        responseType: "arraybuffer",
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/${id}/download`,
+        {
+          headers: {
+            "Accept-Language": locale,
+            Authorization: `Bearer ${session?.token}`,
+          },
+          responseType: "arraybuffer",
+        }
+      );
 
       // Convert ArrayBuffer to Base64 for client-side use
       const base64Data = Buffer.from(response.data).toString("base64");
@@ -81,12 +86,16 @@ export const BillsService = {
    */
   async view(guid: string, session: Session, locale: string = "en") {
     try {
-      const response = await apiClient.get(`/bills/${guid}/view`, {
-        headers: {
-          "Accept-Language": locale,
-        },
-        responseType: "arraybuffer",
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/${guid}/view`,
+        {
+          headers: {
+            "Accept-Language": locale,
+            Authorization: `Bearer ${session?.token}`,
+          },
+          responseType: "arraybuffer",
+        }
+      );
 
       // Convert ArrayBuffer to Base64 for client-side use
       const base64Data = Buffer.from(response.data).toString("base64");

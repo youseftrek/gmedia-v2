@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getRequestDetails(
   requestId: number,
@@ -21,8 +21,8 @@ export async function getRequestDetails(
   message: any;
 }> {
   try {
-    const basicInfo = await apiClient.get(
-      `/request/details?documentId=${requestId}`,
+    const basicInfo = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/details?documentId=${requestId}`,
       {
         headers: {
           "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
@@ -55,8 +55,8 @@ export async function getCertificateDetails(
   session: Session
 ) {
   try {
-    const resquestDetails = await apiClient.get(
-      `/certificate/details-by-documentId/${requestId}`,
+    const resquestDetails = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/certificate/details-by-documentId/${requestId}`,
       {
         headers: {
           Authorization: `Bearer ${session?.token}`,
@@ -74,11 +74,14 @@ export async function getCertificateDetails(
 
 export async function checkHasBill(requestId: number, session: Session) {
   try {
-    const hasBill = await apiClient.get(`/bills/${requestId}/has-bill`, {
-      headers: {
-        Authorization: `Bearer ${session?.token}`,
-      },
-    });
+    const hasBill = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/${requestId}/has-bill`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+      }
+    );
   } catch (error) {
     console.error("Error while getting form data:", error);
     return {
@@ -90,11 +93,14 @@ export async function checkHasBill(requestId: number, session: Session) {
 
 export async function getBillDetails(requestId: number, session: Session) {
   try {
-    const Bill = await apiClient.get(`/bills/details/${requestId}`, {
-      headers: {
-        Authorization: `Bearer ${session?.token}`,
-      },
-    });
+    const Bill = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/details/${requestId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.token}`,
+        },
+      }
+    );
   } catch (error) {
     console.error("Error while getting form data:", error);
     return {

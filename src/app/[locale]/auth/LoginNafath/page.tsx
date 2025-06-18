@@ -30,8 +30,12 @@ const LoginNafath = () => {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
+        // Set the default language based on user preference
+        const defaultLanguage = response.data.user.language === 1 ? "ar" : "en";
+        sessionStorage.setItem("defaultLanguage", defaultLanguage);
+
         // Redirect to dashboard
-        router.push("/dashboard");
+        window.location.href = "/dashboard";
       } catch (error) {
         console.error("Login error:", error);
         setError(t("loginFailed"));
@@ -47,7 +51,7 @@ const LoginNafath = () => {
     <div className="flex justify-center items-center min-h-screen bg-background">
       {loading ? (
         <div className="fixed inset-0 bg-background/90 flex flex-col justify-center items-center z-50">
-          <div className="relative w-24 h-24 mb-4">
+          <div className="relative w-[316px] h-[316px] mb-4">
             <Image
               src="/images/gmedia/loader.svg"
               alt={t("authenticating")}

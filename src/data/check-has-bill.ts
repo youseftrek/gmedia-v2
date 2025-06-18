@@ -1,6 +1,5 @@
 import { Session } from "@/lib/auth";
 import axios from "axios";
-import apiClient from "@/lib/apiClient";
 
 /**
  * Checks if a request has an associated bill
@@ -25,7 +24,7 @@ export const checkHasBill = async (
       };
     }
 
-    const response = await apiClient.get(
+    const response = await axios.get(
       //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/bills/${requestId}/has-bill`,
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/basic-info?documentId=${requestId}`,
       {

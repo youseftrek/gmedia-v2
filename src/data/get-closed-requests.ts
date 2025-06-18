@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getClosedRequests(
   session: Session,
@@ -9,12 +9,13 @@ export async function getClosedRequests(
   locale: string
 ) {
   try {
-    const response = await apiClient.get(
-      `/request/my-requests?status=3&startIndex=${currentPage}&pageSize=${pageSize}`,
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/my-requests?status=3&startIndex=${currentPage}&pageSize=${pageSize}`,
       {
         headers: {
           "Content-Type": "application/json",
           "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
+          Authorization: `Bearer ${session?.token}`,
         },
       }
     );

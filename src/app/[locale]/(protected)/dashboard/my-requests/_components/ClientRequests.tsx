@@ -6,13 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import RequestCard from "@/components/RequestCard";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Calendar,
-  Search,
-  ChevronDown,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, Search } from "lucide-react";
 import {
   Select,
   SelectContent,

@@ -1,11 +1,11 @@
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import axios from "axios";
 import { AxiosError } from "axios";
 
 export async function getCounters(session: Session) {
   try {
-    const countersRes = await apiClient.get(
+    const countersRes = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/counters`,
       {
         headers: {

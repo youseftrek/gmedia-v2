@@ -1,8 +1,8 @@
-import apiClient from "@/lib/apiClient";
+import axios from "axios";
 
 export async function getCaptcha() {
   try {
-    const res = await apiClient.post(
+    const res = await axios.post(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/captcha`
     );
     return { success: true, data: res };

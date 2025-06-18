@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getRequests(
   session: Session,
@@ -8,11 +8,12 @@ export async function getRequests(
   pageSize = 10
 ) {
   try {
-    const response = await apiClient.get(
-      `/request/my-requests?startIndex=${currentPage}&pageSize=${pageSize}`,
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/my-requests?startIndex=${currentPage}&pageSize=${pageSize}`,
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.token}`,
         },
       }
     );
@@ -47,11 +48,12 @@ export async function getMyRequests(
   locale: string
 ) {
   try {
-    const response = await apiClient.get(
-      `/request/inbox?startIndex=${currentPage}&pageSize=${pageSize}`,
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/inbox?startIndex=${currentPage}&pageSize=${pageSize}`,
       {
         headers: {
           "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
+          Authorization: `Bearer ${session?.token}`,
         },
       }
     );

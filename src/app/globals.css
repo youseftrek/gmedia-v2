@@ -356,6 +356,28 @@
     @apply p-4 border rounded-md border-border bg-card;
   }
 
+  /* Fix for tab content visibility */
+  .formio-component-tabs .tab-pane {
+    @apply hidden;
+  }
+
+  .formio-component-tabs .tab-pane.active {
+    @apply block;
+  }
+
+  /* Additional tab fixes */
+  .formio-component-tabs {
+    @apply relative;
+  }
+
+  .formio-component-tabs .tab-content > .tab-pane {
+    @apply absolute invisible opacity-0 w-0 h-0 overflow-hidden;
+  }
+
+  .formio-component-tabs .tab-content > .tab-pane.active {
+    @apply relative visible opacity-100 w-full h-auto overflow-visible;
+  }
+
   /* HTML element styling */
   .formio-component-htmlelement {
     @apply text-foreground;

@@ -1,6 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getFormData(
   documentTypeBaseId: number,
@@ -8,8 +8,8 @@ export async function getFormData(
   locale: string
 ) {
   try {
-    const res = await apiClient.get(
-      `/request/form?documentTypeBaseId=${documentTypeBaseId}`,
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/form?documentTypeBaseId=${documentTypeBaseId}`,
       {
         headers: {
           Authorization: `Bearer ${session?.token}`,

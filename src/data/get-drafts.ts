@@ -1,7 +1,6 @@
 import { LOCALE_CODE } from "@/constants/locale";
-import apiClient from "@/lib/apiClient";
-import axios from "axios";
 import { Session } from "@/lib/auth";
+import axios from "axios";
 
 export async function getDrafts(
   session: Session,
@@ -10,12 +9,13 @@ export async function getDrafts(
   locale: string
 ) {
   try {
-    const response = await apiClient.get(
+    const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/drafts?startIndex=${currentPage}&pageSize=${pageSize}`,
       {
         headers: {
           "Content-Type": "application/json",
           "Accept-Language": LOCALE_CODE[locale as keyof typeof LOCALE_CODE],
+          Authorization: `Bearer ${session.token}`,
         },
       }
     );

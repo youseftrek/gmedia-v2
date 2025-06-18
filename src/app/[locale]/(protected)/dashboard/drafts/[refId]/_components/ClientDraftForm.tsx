@@ -1,9 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Formio } from "formiojs";
+// Add a dynamic import for Formio
+let Formio: any;
+// This will only run on the client side
+if (typeof window !== "undefined") {
+  import("formiojs").then((module) => {
+    Formio = module.Formio;
+  });
+}
 import { useRouter } from "next/navigation";
-import apiClient from "@/lib/apiClient";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +22,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { BackButton } from "@/components/shared/BackButton";
 import { useAuth } from "@/providers/AuthProvider";
+import axios from "axios";
 
 export default function ClientDraftForm({
   formDataObj,
@@ -125,10 +132,10 @@ export default function ClientDraftForm({
         formBuilder.FormDesigner = formDataObj.formDesigner;
         formBuilder.IsFormReadonly = false;
         formBuilder.CurrentLanguage = locale;
-        const formData = formDataObj.formData;
+        const formData = JSON.parse(formDataObj.formData);
 
         // Build the form
-        formBuilder.BuildForm("form-container", { formData: { ...formData } });
+        formBuilder.BuildForm("form-container", { formData });
         setFormBuilder(formBuilder);
         setIsFormBuilt(true);
       } catch (error) {
@@ -194,7 +201,13 @@ export default function ClientDraftForm({
       }
 
       // Call API to update draft
-      const response = await apiClient.post("/request/update-draft", model);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/update-draft`,
+        model,
+        {
+          headers: { Authorization: `Bearer ${session?.token}` },
+        }
+      );
 
       if (response.data) {
         setIsSubmit(false);
@@ -270,7 +283,13 @@ export default function ClientDraftForm({
       }
 
       // Call API to submit draft
-      const response = await apiClient.post("/request/submit-draft", model);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/request/submit-draft`,
+        model,
+        {
+          headers: { Authorization: `Bearer ${session?.token}` },
+        }
+      );
 
       if (response.data && response.data.success) {
         setReferenceNumber(response.data.data);
@@ -403,21 +422,8 @@ export default function ClientDraftForm({
         <div className="flex items-center gap-2">
           <BackButton size="icon" className="rtl:rotate-180 ltr:rotate-180" />
           <h1 className="text-2xl font-bold">
-            <span className="text-muted-foreground">{t("draft")}</span> {refId}
+            <span className="text-muted-foreground">{t("draft")}</span> #####
           </h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" disabled={loading} onClick={updateDraft}>
-            {commonT("save")}
-          </Button>
-          <Button
-            ref={headerSubmitButtonRef}
-            className="apply-request-header"
-            disabled={loading || !isFormValid}
-            onClick={openConfirmDialog}
-          >
-            {commonT("submit")}
-          </Button>
         </div>
       </div>
 
